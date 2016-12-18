@@ -7,36 +7,23 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './template/nav-bar/nav-bar.component';
 import { AppContentListComponent } from './template/app-content/app-content-list.component';
 import { AppContentCreateComponent } from './template/app-content/app-content-create.component';
+import { AppContentMainComponent } from './template/app-content/app-content-main.component';
 
-const appRoutes: Routes = [
-    {
-        path: 'listar', component: AppContentListComponent, data: {
-            title: 'Listar Usuários'
-        }
-    },
-    {
-        path: '', component: AppContentListComponent, data: {
-            title: 'Listar Usuários'
-        }
-    },
-    {
-        path: 'cadastrar', component: AppContentCreateComponent, data: {
-            title: 'Cadastrar Usuário'
-        }
-    }
-];
+import { AppRoutingModule } from './modules/routes/app-routing.module';
+
 
 @NgModule( {
     declarations: [
         AppComponent,
         NavBarComponent,
         AppContentListComponent,
-        AppContentCreateComponent
+        AppContentCreateComponent,
+        AppContentMainComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot( appRoutes )
+        AppRoutingModule
     ],
     bootstrap: [AppComponent]
 })
