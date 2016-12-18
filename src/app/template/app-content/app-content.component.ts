@@ -6,8 +6,7 @@ import { UserService } from './../../services/user.service';
 
 @Component( {
     selector: 'app-content',
-    templateUrl: './app-content.component.html',
-    styleUrls: ['./app-content.component.css']
+    templateUrl: './app-content.component.html'
 })
 export class AppContentComponent {
     
