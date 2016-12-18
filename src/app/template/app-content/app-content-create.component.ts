@@ -2,25 +2,25 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { User } from './../../models/user';
+
 import { UserService } from './../../services/user.service';
 
 @Component( {
-    selector: 'app-content',
-    templateUrl: './app-content.component.html'
+    selector: 'app-app-content-create',
+    templateUrl: './app-content-create.component.html'
 })
-export class AppContentComponent {
-    
+export class AppContentCreateComponent {
+
     public user: User = new User();
 
-    constructor(){}
-    
-    public getUsersMock(): User[]{
+    constructor() { }
+
+    public getUsersMock(): User[] {
         return new UserService().selectAllUsers();
     }
-    
-    public onSubmit(form: NgForm){
-        console.log(form.value.sexo);
+
+    public onSubmit( form: NgForm ) {
+        console.log( form.value.sexo );
     }
-    
 
 }
