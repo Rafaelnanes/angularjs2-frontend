@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
-import { DatabindingComponent } from './databinding/databinding.component';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-    moduleId: 'principal',
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app works!';
+export class AppComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }

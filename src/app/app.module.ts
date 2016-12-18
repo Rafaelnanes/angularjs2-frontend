@@ -1,21 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }    from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+
 import { AppComponent } from './app.component';
-import { DatabindingComponent } from './databinding/databinding.component';
+import { BodyComponent } from './template/body/body.component';
+import { NavBarComponent } from './template/nav-bar/nav-bar.component';
+import { AppContentComponent } from './template/app-content/app-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DatabindingComponent
+    BodyComponent,
+    NavBarComponent,
+    AppContentComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    FormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
