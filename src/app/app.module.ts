@@ -9,6 +9,8 @@ import { AppContentListComponent } from './template/app-content/app-content-list
 import { AppContentCreateComponent } from './template/app-content/app-content-create.component';
 import { AppContentMainComponent } from './template/app-content/app-content-main.component';
 
+import { ProdutosModule } from './modules/produtos/produtos.module';
+
 import { AppRoutingModule } from './modules/routes/app-routing.module';
 
 
@@ -23,7 +25,8 @@ import { AppRoutingModule } from './modules/routes/app-routing.module';
     imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        ProdutosModule
     ],
     bootstrap: [AppComponent]
 })

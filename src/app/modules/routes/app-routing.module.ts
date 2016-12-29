@@ -3,22 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppContentMainComponent, AppContentListComponent, AppContentCreateComponent } from './../../template/app-content/index';
 
-const appRoutes: Routes = [
-
+const routesCore: Routes = [
     {
-        path: 'cadastrar', component: AppContentCreateComponent
+        path: '',
+        component: AppContentMainComponent
     },
     {
-        path: '', component: AppContentMainComponent
+        path: 'usuario/listar',
+        component: AppContentListComponent
     },
     {
-        path: 'listar', component: AppContentListComponent
+        path: 'usuario/cadastrar',
+        component: AppContentCreateComponent
     }
 ];
 
-@NgModule( {
+@NgModule({
     imports: [
-        RouterModule.forRoot( appRoutes )
+        RouterModule.forRoot(routesCore)
     ],
     exports: [RouterModule],
     declarations: []
