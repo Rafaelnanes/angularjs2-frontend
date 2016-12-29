@@ -13,14 +13,16 @@ import { ProdutosModule } from './modules/produtos/produtos.module';
 
 import { AppRoutingModule } from './modules/routes/app-routing.module';
 
+import { SampleComponent } from 'produto-1-module';
 
-@NgModule( {
+@NgModule({
     declarations: [
         AppComponent,
         NavBarComponent,
         AppContentListComponent,
         AppContentCreateComponent,
-        AppContentMainComponent
+        AppContentMainComponent,
+        SampleComponent
     ],
     imports: [
         BrowserModule,
