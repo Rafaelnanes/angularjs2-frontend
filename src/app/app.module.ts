@@ -13,7 +13,7 @@ import { ProdutosModule } from './modules/produtos/produtos.module';
 
 import { AppRoutingModule } from './modules/routes/app-routing.module';
 
-import { SampleComponent } from 'produto-1-module';
+import { produtoComponents, produtoRoutes } from 'produto-1-module';
 
 @NgModule({
     declarations: [
@@ -22,13 +22,14 @@ import { SampleComponent } from 'produto-1-module';
         AppContentListComponent,
         AppContentCreateComponent,
         AppContentMainComponent,
-        SampleComponent
+        produtoComponents
     ],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        ProdutosModule
+        RouterModule.forRoot(produtoRoutes)
+
     ],
     bootstrap: [AppComponent]
 })
