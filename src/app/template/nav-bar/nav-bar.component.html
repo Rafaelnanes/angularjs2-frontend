@@ -1,27 +1,14 @@
 <nav class="navbar navbar-dark bg-inverse bg-faded">
 	<a class="navbar-brand" routerLink="/">AppTeste</a>
 	<ul class="nav navbar-nav">
-		<li class="nav-item">
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					Usuário
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					<li><a routerLink="/usuario/listar">Listar</a></li>
-					<li><a routerLink="/usuario/cadastrar" routerLinkActive="active">Cadastrar</a></li>
-				</ul>
-			</div>
-		</li>
-		<li class="nav-item">
+		<li class="nav-item" *ngFor="let mainMenu of getAllMenus()">
 			<div class="dropdown">
 				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					Produtos
+					{{mainMenu.title}}
 					<span class="caret"></span>
 				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-					<li><a routerLink="/produtos/listar">Listar</a></li>
-					<li><a routerLink="/produtos/cadastrar" routerLinkActive="active">Cadastrar</a></li>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" >
+					<li *ngFor="let childs of mainMenu.childs"><a routerLink="{{childs.path}}">{{childs.name}}</a></li>
 				</ul>
 			</div>
 		</li>

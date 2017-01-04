@@ -13,7 +13,7 @@ import { ProdutosModule } from './modules/produtos/produtos.module';
 
 import { AppRoutingModule } from './modules/routes/app-routing.module';
 
-import { produtoComponents, produtoRoutes } from 'produto-1-module';
+import { ProdutoModule } from './imports';
 
 @NgModule({
     declarations: [
@@ -21,15 +21,16 @@ import { produtoComponents, produtoRoutes } from 'produto-1-module';
         NavBarComponent,
         AppContentListComponent,
         AppContentCreateComponent,
-        AppContentMainComponent,
-        produtoComponents
+        AppContentMainComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        RouterModule.forRoot(produtoRoutes)
-
+        ProdutoModule
+    ],
+    providers:[
+        ProdutoModule.forRoot().providers
     ],
     bootstrap: [AppComponent]
 })
