@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
