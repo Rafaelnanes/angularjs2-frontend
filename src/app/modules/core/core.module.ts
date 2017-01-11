@@ -12,10 +12,6 @@ import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
-//Services
-import { AuthService } from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -33,8 +29,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     NavBarComponent
   ],
   providers:[
-    AuthService,
-    AuthGuardService
+
   ]
 })
 export class CoreModule { }

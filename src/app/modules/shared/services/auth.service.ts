@@ -11,7 +11,7 @@ export class AuthService {
     redirectUrl: string;
 
     login(): void {
-        this.isLoggedIn = true;
+        this.isLoggedIn = false;
     }
 
     logout(): void {

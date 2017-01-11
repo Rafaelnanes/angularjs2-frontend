@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardService } from './../shared/services/auth-guard.service';
 
 const appRoutes: Routes = [
   {
