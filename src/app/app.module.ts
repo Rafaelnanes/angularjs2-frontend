@@ -9,7 +9,6 @@ import { SharedModule } from './modules/shared/shared.module';
 
 //services
 import { AuthGuardService } from './modules/shared/services/auth-guard.service';
-import { AuthService } from './modules/shared/services/auth.service';
 
 //Components - Core
 import { AppComponent } from './app.component';
@@ -26,8 +25,7 @@ import { AppComponent } from './app.component';
     SharedModule
   ],
   providers: [
-    AuthGuardService,
-    AuthService
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
