@@ -7,13 +7,11 @@ import { HttpModule } from '@angular/http';
 import { CoreModule } from './modules/core/core.module';
 
 //Components - Core
-import { AppComponent } from './components/app.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavBarComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
