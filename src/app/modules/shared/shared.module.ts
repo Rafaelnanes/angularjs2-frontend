@@ -1,11 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AuthService } from './services/auth.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    RouterModule
   ],
   declarations: [
 
@@ -14,6 +18,9 @@ import { AuthService } from './services/auth.service';
     AuthService
   ],
   exports: [
+    FormsModule,
+    RouterModule,
+    CommonModule
   ]
 })
 export class SharedModule {

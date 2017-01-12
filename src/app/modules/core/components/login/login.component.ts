@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { User } from 'app/modules/shared/models/user';
+import { AuthenticationService } from 'app/modules/shared/services/authentication.service';
 
 @Component({
   selector: 'pro-login',
   templateUrl: './login.component.html',
   styles: []
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor() { }
+  public user: User = new User("admin", "password");
 
-  ngOnInit() {
+  constructor(private authService: AuthenticationService) {
+  }
+
+  public onSubmit(): void {
+    this.authService.login(this.user.login, this.user.password);
   }
 
 }

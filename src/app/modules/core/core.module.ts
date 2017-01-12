@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
 
 //Modules
 import { AppRoutingModule } from './app-routing.module';
 import { ProductModule } from './../product/product.module';
+import { SharedModule } from './../shared/shared.module';
+import { AuthenticationService } from './../shared/services/authentication.service';
 
 //Components
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -14,7 +14,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     ProductModule,
     AppRoutingModule
   ],
@@ -25,11 +25,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     PageNotFoundComponent
   ],
   exports: [
-    RouterModule,
     NavBarComponent
   ],
-  providers:[
-
+  providers: [
+    AuthenticationService
   ]
 })
 export class CoreModule { }
