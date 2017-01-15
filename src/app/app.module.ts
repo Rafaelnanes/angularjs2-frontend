@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, BaseRequestOptions } from '@angular/http';
 
 //Modules 
@@ -13,6 +13,8 @@ import { AuthGuardService } from './modules/shared/services/auth-guard.service';
 //Components - Core
 import { AppComponent } from './app.component';
 
+//Directives
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +22,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     CoreModule,
     SharedModule

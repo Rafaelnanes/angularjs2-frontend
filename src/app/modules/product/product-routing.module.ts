@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductCreateComponent } from './product-create/product-create.component';
-import { ProductCenterComponent } from './product-center/product-center.component';
+import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { ProductCenterComponent } from './components/product-center/product-center.component';
 
 import { AuthGuardService } from './../shared/services/auth-guard.service';
 
