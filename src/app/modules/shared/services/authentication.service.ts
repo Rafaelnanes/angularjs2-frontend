@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { AppSettings } from './appSettings';
+import { AppSettings } from './index';
 
 @Injectable()
 export class AuthenticationService {

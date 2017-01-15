@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 //Modules
 import { AppRoutingModule } from './app-routing.module';
-import { ProductModule } from './../product/product.module';
+import { ProductModule } from './../product/index';
 import { SharedModule } from './../shared/shared.module';
 import { AuthenticationService } from './../shared/services/authentication.service';
 
