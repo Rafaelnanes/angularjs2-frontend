@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { AuthService } from './services/auth.service';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +13,6 @@ import { AuthService } from './services/auth.service';
 
   ],
   providers: [
-    AuthService
   ],
   exports: [
     FormsModule,

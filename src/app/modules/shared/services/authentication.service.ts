@@ -9,7 +9,6 @@ import { AppSettings } from './appSettings';
 @Injectable()
 export class AuthenticationService {
     public token: string;
-    private headers = new Headers({ 'Content-Type': 'application/json' });
 
     constructor(private http: Http, private router: Router) {
         var currentUser = JSON.parse(localStorage.getItem(AppSettings.CURRENT_USER));
@@ -17,7 +16,7 @@ export class AuthenticationService {
     }
 
     public login(username: string, password: string): void {
-        this.http.post('http://localhost:8080/login', JSON.stringify({ username: username, password: password }), { headers: this.headers })
+        this.http.post(AppSettings.BASE_URL + 'login', JSON.stringify({ username: username, password: password }))
             .toPromise()
             .then(response => {
                 let result: Headers = response.headers;
