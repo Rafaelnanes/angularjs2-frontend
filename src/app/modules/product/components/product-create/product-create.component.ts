@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from './../../models/product';
 import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@angular/forms';
+import { Product } from './../../models/product';
 
 @Component({
   selector: 'pro-product-create',
-  templateUrl: './product-create.component.html',
-  styles: []
+  templateUrl: './product-create.component.html'
 })
 export class ProductCreateComponent implements OnInit {
 
@@ -27,7 +26,7 @@ export class ProductCreateComponent implements OnInit {
 
   public submit(): void {
     this.isSubmitted = true;
-    console.log("product", this.productForm);
+    console.log("Submitted: ", this.productForm);
   }
 
   internalValidator(control:FormControl):{[key:string]:boolean}{

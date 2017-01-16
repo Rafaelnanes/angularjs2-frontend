@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductCenterComponent } from './components/product-center/product-center.component';
-
-import { AuthGuardService } from './../shared/services/auth-guard.service';
+import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { AuthGuardService } from './../shared/index';
 
 const appRoutes: Routes = [
   {
