@@ -1,22 +1,15 @@
 import { NgModule } from '@angular/core';
 
-//Modules
-import { AppRoutingModule } from './app-routing.module';
+import { CoreRoutingModule } from './core-routing.module';//TODO
 import { ProductModule } from './../product/index';
-import { SharedModule } from './../shared/shared.module';
-import { AuthenticationService } from './../shared/services/authentication.service';
-
-//Components
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { MainComponent } from './components/main/main.component';
-import { LoginComponent } from './components/login/login.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthenticationService, SharedModule } from './../shared/index';
+import { NavBarComponent, PageNotFoundComponent, MainComponent, LoginComponent } from './components/index';
 
 @NgModule({
   imports: [
     SharedModule,
     ProductModule,
-    AppRoutingModule
+    CoreRoutingModule
   ],
   declarations: [
     NavBarComponent,

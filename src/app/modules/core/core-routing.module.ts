@@ -2,13 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-//Comonents
-import { MainComponent } from './components/main/main.component';
-import { LoginComponent } from './components/login/login.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
-//Services
-import { AuthGuardService } from './../shared/services/auth-guard.service';
+import { PageNotFoundComponent, LoginComponent, MainComponent } from './components/index';
+import { AuthGuardService } from './../shared/index';
 
 const appRoutes: Routes = [
   {
@@ -36,4 +31,4 @@ const appRoutes: Routes = [
   exports: [],
   declarations: []
 })
-export class AppRoutingModule { }
+export class CoreRoutingModule { }

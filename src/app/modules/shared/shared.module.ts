@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AppErrorFormComponent } from './components/app-error-form/app-error-form.component';
+import { AppErrorFormComponent } from './components/index';
 
 @NgModule({
   imports: [

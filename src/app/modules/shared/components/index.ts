@@ -1,1 +1,1 @@
-export * from './app-error-form/app-error-form.component';
+export { AppErrorFormComponent } from './app-error-form/app-error-form.component';

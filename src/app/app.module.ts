@@ -5,7 +5,6 @@ import { HttpModule, BaseRequestOptions } from '@angular/http';
 
 import { CoreModule } from './modules/core/index';
 import { SharedModule, AuthGuardService } from './modules/shared/index';
-import { AppErrorFormComponent } from './modules/shared/components/app-error-form/app-error-form.component';
 import { AppComponent } from './app.component';
 
 @NgModule({

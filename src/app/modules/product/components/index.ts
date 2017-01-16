@@ -1,2 +1,2 @@
-export * from './product-center/product-center.component';
-export * from './product-create/product-create.component';
+export { ProductCenterComponent } from './product-center/product-center.component';
+export { ProductCreateComponent } from './product-create/product-create.component';
