@@ -8,7 +8,6 @@ import { NavBarComponent, PageNotFoundComponent, MainComponent, LoginComponent }
 @NgModule({
   imports: [
     SharedModule,
-    ProductModule,
     CoreRoutingModule
   ],
   declarations: [

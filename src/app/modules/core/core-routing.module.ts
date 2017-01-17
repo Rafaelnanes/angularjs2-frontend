@@ -15,12 +15,13 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  { path: '**', component: PageNotFoundComponent },
+  { path: 'product', loadChildren: 'app/modules/product/product.module#ProductModule' },
   {
     path: '',
     redirectTo: '/main',
     pathMatch: 'full'
-  }
+  },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

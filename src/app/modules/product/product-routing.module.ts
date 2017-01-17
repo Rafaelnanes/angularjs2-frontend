@@ -8,17 +8,17 @@ import { AuthGuardService } from './../shared/index';
 
 const appRoutes: Routes = [
   {
-    path: 'product/center', component: ProductCenterComponent, canActivate: [AuthGuardService]
+    path: '', component: ProductCenterComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'product/create', component: ProductCreateComponent, canActivate: [AuthGuardService]
+    path: 'create', component: ProductCreateComponent, canActivate: [AuthGuardService]
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forChild(appRoutes)
   ],
   declarations: [],
   exports: []

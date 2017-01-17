@@ -20,7 +20,7 @@ import { SharedModule} from './../shared/index';
     ProductCreateComponent
   ],
   exports: [
-    RouterModule
+    
   ]
 })
 export class ProductModule { }
