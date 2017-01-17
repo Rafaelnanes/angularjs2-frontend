@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { User } from 'app/modules/shared/models/user';
-import { AuthenticationService } from 'app/modules/shared/services/authentication.service';
+import { User, AuthenticationService } from './../../../shared/index';
 
 @Component({
   selector: 'pro-login',

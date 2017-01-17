@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from 'app/modules/shared/services/authentication.service';
+import { AuthenticationService } from './../../../shared/index';
 
 @Component({
   selector: 'pro-nav-bar',
