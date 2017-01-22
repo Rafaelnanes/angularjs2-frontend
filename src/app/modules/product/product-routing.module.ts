@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductCenterComponent } from './components/index';
-import { ProductCreateComponent } from './components/index';
+import { ProductCenterComponent, ProductCreateComponent, ProductInfoComponent } from './components/index';
 import { AuthGuardService } from './../shared/index';
 
 const appRoutes: Routes = [
@@ -12,6 +11,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'create', component: ProductCreateComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'info/:id', component: ProductInfoComponent, canActivate: [AuthGuardService]
   }
 ];
 

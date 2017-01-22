@@ -18,7 +18,6 @@ export abstract class DefaultHttp<T>{
     }
 
     protected post(url:string, object:T): Observable<Response> {
-        console.log("this.headers", this.headers);
         return this.http.post(AppSettings.BASE_URL + url, object, { headers: this.headers });
     };
 

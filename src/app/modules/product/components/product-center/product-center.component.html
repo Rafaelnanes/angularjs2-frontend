@@ -1,8 +1,16 @@
 <div class="jumbotron">
-  <h1>Product center</h1>
-  <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes
-    the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-  <p>
-    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-  </p>
+  <h1>Product list</h1>
+
+  <div class="card" *ngFor="let product of products | async">
+    <div class="card-header">
+      Product : {{product.name}}
+    </div>
+    <div class="card-block">
+      <h4 class="card-title">Value : {{product.value}}</h4>
+      <button type="button" (click)="info(product)" class="btn btn-primary">Info</button>
+      <button type="button" (click)="update(product)" class="btn btn-warning">Update</button>
+      <button type="button" (click)="delete(product)" class="btn btn-danger">Delete</button>
+    </div>
+    <br />
+  </div>
 </div>

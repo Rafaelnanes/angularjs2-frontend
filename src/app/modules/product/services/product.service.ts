@@ -12,28 +12,34 @@ import { AppSettings, DefaultHttp } from './../../shared/index';
 @Injectable()
 export class ProductService extends DefaultHttp<Product> implements IGenericService<Product>{
 
+  private MODULE_API_PATH: string = "product";
+
   constructor(protected http: Http, protected router: Router) {
     super(http, router);
   }
 
-  public save(product: Product): void {
-    this.post("product", JSON.stringify(product))
-      .toPromise().then(response => {
-        console.log('response.data', response.json);
-      })
+  public save(product: Product): Promise<Product> {
+    return this.post(this.MODULE_API_PATH, JSON.stringify(product))
+      .toPromise().then(response => response.json());
   };
-  public update(product: Product): void {
-    console.log("update");
-  };
-  public remove(product: Product): void {
-    console.log("delete");
+  public update(product: Product): Promise<Product> {
+    return null;
   };
 
-  public getAll(): Product[] {
-    return null;
+  public getAll(): Promise<Product[]> {
+    return this.get(this.MODULE_API_PATH).toPromise().then(response => response.json() as Product[]).catch(this.handleError);
   };
-  public getById(): Product {
-    return null;
+  public getById(id: number): Promise<Product> {
+    return this.get(this.MODULE_API_PATH + "/" + id).toPromise().then(response => response.json() as Product).catch(this.handleError);
   };
+
+  public remove(product: Product): void {
+    this.delete(this.MODULE_API_PATH + "/" + product.id).toPromise().catch(this.handleError);
+  };
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 
 }

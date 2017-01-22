@@ -1,1 +1,1 @@
-export { IGenericService } from './i-genericService';
+export { IGenericService } from './iGenericService';
