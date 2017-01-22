@@ -33,7 +33,8 @@ export class ProductCenterComponent implements OnInit {
   }
 
   public delete(product: Product): void {
-    this.productService.remove(product);
-    this.refreshProducts();
+    this.productService.remove(product).then(response => {
+      this.refreshProducts();
+    });
   }
 }

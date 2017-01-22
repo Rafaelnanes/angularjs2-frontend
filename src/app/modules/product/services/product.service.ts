@@ -33,8 +33,8 @@ export class ProductService extends DefaultHttp<Product> implements IGenericServ
     return this.get(this.MODULE_API_PATH + "/" + id).toPromise().then(response => response.json() as Product).catch(this.handleError);
   };
 
-  public remove(product: Product): void {
-    this.delete(this.MODULE_API_PATH + "/" + product.id).toPromise().catch(this.handleError);
+  public remove(product: Product): Promise<Product> {
+    return this.delete(this.MODULE_API_PATH + "/" + product.id).toPromise().then(response => response).catch(this.handleError);
   };
 
   private handleError(error: any): Promise<any> {
