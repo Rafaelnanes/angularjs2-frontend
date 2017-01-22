@@ -1,0 +1,1 @@
+export { IGenericService } from './i-genericService';

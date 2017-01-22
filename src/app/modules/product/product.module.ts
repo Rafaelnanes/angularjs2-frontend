@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProductRoutingModule } from './product-routing.module';//TODO
 import { ProductCenterComponent, ProductCreateComponent } from './components/index';
-import { SharedModule} from './../shared/index';
+import { SharedModule } from './../shared/index';
+import { ProductService } from './index';
 
 @NgModule({
   imports: [
@@ -20,7 +21,10 @@ import { SharedModule} from './../shared/index';
     ProductCreateComponent
   ],
   exports: [
-    
+
+  ],
+  providers: [
+    ProductService
   ]
 })
 export class ProductModule { }

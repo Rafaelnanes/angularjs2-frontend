@@ -3,7 +3,7 @@
     <div class="form-group row">
       <label class="col-sm-2">Name</label>
       <div class="col-sm-10">
-        <input type="text" proExternalValidator formControlName="name" class="form-control" aria-describedby="nameHelp" placeholder="Enter name">
+        <input type="text" formControlName="name" class="form-control" aria-describedby="nameHelp" placeholder="Enter name">
       </div>
       <pro-app-error-form [formCtrl]="productForm.get('name')" [isSubmitted]="isSubmitted"></pro-app-error-form>
     </div>

@@ -8,11 +8,8 @@ import { AppSettings } from './index';
 
 @Injectable()
 export class AuthenticationService {
-    public token: string;
 
     constructor(private http: Http, private router: Router) {
-        var currentUser = JSON.parse(localStorage.getItem(AppSettings.CURRENT_USER));
-        this.token = currentUser && currentUser.token;
     }
 
     public login(username: string, password: string): void {
@@ -21,15 +18,15 @@ export class AuthenticationService {
             .then(response => {
                 let result: Headers = response.headers;
                 let token: string = result.get(AppSettings.TOKEN_HEADER);
-                this.token = token;
                 localStorage.setItem(AppSettings.CURRENT_USER, JSON.stringify({ username: username, token: token }));
+                localStorage.setItem(AppSettings.TOKEN_HEADER, token);
                 this.router.navigate(['/main']);
             }).catch(this.handleError);
     }
 
     public logout(): void {
-        this.token = null;
         localStorage.removeItem(AppSettings.CURRENT_USER);
+        localStorage.removeItem(AppSettings.TOKEN_HEADER);
         this.router.navigate(['/login']);
     }
 

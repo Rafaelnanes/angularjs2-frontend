@@ -1,35 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+
 import { Product } from './../../models/product';
+import { ProductCreateComponentAbstract } from './product-create-component-abstract';
+import { ProductService } from './../../index';
 
 @Component({
   selector: 'pro-product-create',
   templateUrl: './product-create.component.html'
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent extends ProductCreateComponentAbstract {
 
-  public productForm: FormGroup;
-  public isSubmitted: boolean = false;
+  public product
 
-  constructor(private fb:FormBuilder) { }
-
-  public ngOnInit(): void {
-    this.buildForm();
-  }
-
-  private buildForm(): void {
-    this.productForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), this.internalValidator]],
-      value: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]]
-    });
+  constructor(fb: FormBuilder, private productService: ProductService) {
+    super();
+    this.fb = fb;
   }
 
   public submit(): void {
     this.isSubmitted = true;
-    console.log("Submitted: ", this.productForm);
+    if (this.productForm.valid) {
+      this.productService.save(this.productForm.value);
+    }
   }
 
-  internalValidator(control:FormControl):{[key:string]:boolean}{
-    return {"internal" : control.value == "internal"};
-  }
 }
