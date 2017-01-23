@@ -3,14 +3,16 @@ import { FormBuilder } from '@angular/forms';
 import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
 import { Product } from './../../models/product';
-import { ProductService } from './../../index';
-import { ProductCreateComponentAbstract } from './product-create-component-abstract';
+import { ProductService, OperationEnum } from './../../index';
+import { ProductMainComponentAbstract } from './product-main-component-abstract';
 
 @Component({
-  selector: 'pro-product-create',
-  templateUrl: './product-create.component.html'
+  selector: 'pro-product-main',
+  templateUrl: './product-main.component.html'
 })
-export class ProductCreateComponent extends ProductCreateComponentAbstract implements OnInit {
+export class ProductMainComponent extends ProductMainComponentAbstract implements OnInit {
+
+  public readonly: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -27,19 +29,25 @@ export class ProductCreateComponent extends ProductCreateComponentAbstract imple
 
   private setFormModelValue(): void {
     this.operation = this.route.snapshot.data['operation'];
-    if (this.operation != "create") {
+    
+    if (this.operation != OperationEnum.CREATE) {
       let id = this.route.snapshot.params['id'];
       this.productService.getById(id).then(value => {
         this.product = value;
         this.productForm.patchValue(this.product);
       });
+
+      if (this.operation == OperationEnum.READ) {
+        this.readonly = true;
+      }
+
     }
   }
 
   public submit(): void {
     this.isSubmitted = true;
     if (this.productForm.valid) {
-      if (this.operation == "create") {
+      if (this.operation == OperationEnum.CREATE) {
         this.productService.save(this.productForm.value);
       } else {
         this.productService.update(this.productForm.value);
