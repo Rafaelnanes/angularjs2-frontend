@@ -23,7 +23,8 @@ export class ProductService extends DefaultHttp<Product> implements IGenericServ
       .toPromise().then(response => response.json());
   };
   public update(product: Product): Promise<Product> {
-    return null;
+    return this.put(this.MODULE_API_PATH, JSON.stringify(product))
+      .toPromise().then(response => response.json());
   };
 
   public getAll(): Promise<Product[]> {

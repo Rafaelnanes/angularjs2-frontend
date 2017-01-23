@@ -10,7 +10,10 @@ const appRoutes: Routes = [
     path: '', component: ProductCenterComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'create', component: ProductCreateComponent, canActivate: [AuthGuardService]
+    path: 'create', component: ProductCreateComponent, data: { operation: "create" }, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'update/:id', component: ProductCreateComponent, data: { operation: "update" }, canActivate: [AuthGuardService]
   },
   {
     path: 'info/:id', component: ProductInfoComponent, canActivate: [AuthGuardService]

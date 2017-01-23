@@ -29,7 +29,7 @@ export class ProductCenterComponent implements OnInit {
   }
 
   public update(product: Product): void {
-
+    this.router.navigate(["product", "update", product.id]);
   }
 
   public delete(product: Product): void {
