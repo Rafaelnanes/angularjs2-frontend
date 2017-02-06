@@ -5,31 +5,32 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { AppSettings, IGenericService } from './../index';
+import { AppSettings } from './../index';
 
-export abstract class DefaultHttp<T>{
+@Injectable()
+export class DefaultHttp{
 
     protected headers: Headers;
 
-    constructor(protected http: Http, protected router: Router) {
+    constructor(private http: Http, private router: Router) {
         this.headers = new Headers();
         this.headers.append("Authorization", localStorage.getItem(AppSettings.TOKEN_HEADER));
         this.headers.append("Content-Type", "application/json");
     }
 
-    protected post(url:string, object:T): Observable<Response> {
-        return this.http.post(AppSettings.BASE_URL + url, object, { headers: this.headers });
+    public post(url:string, object:any): Promise<Response> {
+        return this.http.post(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise();
     };
 
-    protected put(url:string, object:T): Observable<Response> {
-        return this.http.put(AppSettings.BASE_URL + url, object, { headers: this.headers });
+    public put(url:string, object:any): Promise<Response> {
+        return this.http.put(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise();
     };
 
-    protected get(url:string): Observable<Response> { 
-        return this.http.get(AppSettings.BASE_URL + url, { headers: this.headers });
+    public get(url:string): Promise<Response> { 
+        return this.http.get(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
     };
 
-    protected delete(url:string): Observable<Response> { 
-        return this.http.delete(AppSettings.BASE_URL + url, { headers: this.headers });
+    public delete(url:string): Promise<Response> { 
+        return this.http.delete(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
     };
 }

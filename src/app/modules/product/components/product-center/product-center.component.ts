@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
 
-import { Product } from './../../models/product';
+import { Product } from './../../models/index';
 import { ProductService } from './../../index';
 
 @Component({
@@ -12,7 +12,7 @@ import { ProductService } from './../../index';
 })
 export class ProductCenterComponent implements OnInit {
 
-  public products: Promise<Product[]>;
+  public products: Product[];
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -21,7 +21,11 @@ export class ProductCenterComponent implements OnInit {
   }
 
   private refreshProducts() {
-    this.products = this.productService.getAll();
+    this.productService.getAll().then(response => {
+      this.products = response.json();
+    }).catch(response =>{
+      console.log('error', response);
+    });
   }
 
   public info(product: Product): void {

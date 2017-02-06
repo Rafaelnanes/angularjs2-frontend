@@ -1,1 +1,0 @@
-export { IGenericService } from './iGenericService';

@@ -1,12 +1,12 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@angular/forms';
-import { ProductService, OperationEnum } from './../../index';
+import { ProductService, OperationEnum, Product } from './../../index';
 
 export abstract class ProductMainComponentAbstract {
 
   public productForm: FormGroup;
   public isSubmitted: boolean = false;
-  public product;
+  public product: Product;
   protected fb: FormBuilder;
   protected operation: OperationEnum;
 

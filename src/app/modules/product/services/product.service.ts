@@ -5,42 +5,35 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { IGenericService } from './../../shared/index';
 import { Product } from './../models/product';
 import { AppSettings, DefaultHttp } from './../../shared/index';
 
 @Injectable()
-export class ProductService extends DefaultHttp<Product> implements IGenericService<Product>{
+export class ProductService {
 
   private MODULE_API_PATH: string = "product";
 
-  constructor(protected http: Http, protected router: Router) {
-    super(http, router);
+  constructor(private defaultHttp: DefaultHttp) {
+
   }
 
-  public save(product: Product): Promise<Product> {
-    return this.post(this.MODULE_API_PATH, JSON.stringify(product))
-      .toPromise().then(response => response.json());
+  public save(product: Product): Promise<Response> {
+    return this.defaultHttp.post(this.MODULE_API_PATH, JSON.stringify(product));
   };
-  public update(product: Product): Promise<Product> {
-    return this.put(this.MODULE_API_PATH, JSON.stringify(product))
-      .toPromise().then(response => response.json());
+  public update(product: Product): Promise<Response> {
+    return this.defaultHttp.put(this.MODULE_API_PATH, JSON.stringify(product));
   };
 
-  public getAll(): Promise<Product[]> {
-    return this.get(this.MODULE_API_PATH).toPromise().then(response => response.json() as Product[]).catch(this.handleError);
+  public getAll(): Promise<Response> {
+    return this.defaultHttp.get(this.MODULE_API_PATH);
   };
-  public getById(id: number): Promise<Product> {
-    return this.get(this.MODULE_API_PATH + "/" + id).toPromise().then(response => response.json() as Product).catch(this.handleError);
-  };
-
-  public remove(product: Product): Promise<Product> {
-    return this.delete(this.MODULE_API_PATH + "/" + product.id).toPromise().then(response => response).catch(this.handleError);
+  public getById(id: number): Promise<Response> {
+    return this.defaultHttp.get(this.MODULE_API_PATH + "/" + id);
   };
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+  public remove(product: Product): Promise<Response> {
+    return this.defaultHttp.delete(this.MODULE_API_PATH + "/" + product.id);
+  };
+
 
 }

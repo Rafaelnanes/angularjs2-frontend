@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
-import { Product } from './../../models/product';
+import { Product, ProductType } from './../../models/index';
 import { ProductService, OperationEnum } from './../../index';
 import { ProductMainComponentAbstract } from './product-main-component-abstract';
 
@@ -29,7 +29,7 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
 
   private setFormModelValue(): void {
     this.operation = this.route.snapshot.data['operation'];
-    
+
     if (this.operation != OperationEnum.CREATE) {
       let id = this.route.snapshot.params['id'];
       this.productService.getById(id).then(value => {
@@ -44,15 +44,16 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
     }
   }
 
-  public submit(): void {
+  public send(): void {
     this.isSubmitted = true;
     if (this.productForm.valid) {
+      this.productForm.value.productType = ProductType.getValues()[0];
       if (this.operation == OperationEnum.CREATE) {
         this.productService.save(this.productForm.value);
       } else {
         this.productService.update(this.productForm.value);
       }
-      this.router.navigate(["product"]);
+      //this.router.navigate(["product"]);
     }
   }
 

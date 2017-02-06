@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, BaseRequestOptions } from '@angular/http';
 
 import { CoreModule } from './modules/core/index';
-import { SharedModule, AuthGuardService } from './modules/shared/index';
+import { SharedModule, AuthGuardService, DefaultHttp } from './modules/shared/index';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -20,7 +20,8 @@ import { AppComponent } from './app.component';
     SharedModule
   ],
   providers: [
-    AuthGuardService
+    AuthGuardService,
+    DefaultHttp
   ],
   bootstrap: [AppComponent]
 })
