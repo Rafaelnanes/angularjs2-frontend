@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DefaultHttp } from './modules/shared/index';
 
 @Component({
   selector: 'pro-app',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
-  title = 'pro works!';
+
+    constructor(public defaultHttp: DefaultHttp){
+    }
 }

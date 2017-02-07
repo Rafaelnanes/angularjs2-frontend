@@ -8,8 +8,9 @@ import 'rxjs/add/operator/toPromise';
 import { AppSettings } from './../index';
 
 @Injectable()
-export class DefaultHttp{
+export class DefaultHttp {
 
+    public loading: boolean = false;
     protected headers: Headers;
 
     constructor(private http: Http, private router: Router) {
@@ -18,19 +19,19 @@ export class DefaultHttp{
         this.headers.append("Content-Type", "application/json");
     }
 
-    public post(url:string, object:any): Promise<Response> {
+    public post(url: string, object: any): Promise<Response> {
         return this.http.post(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise();
     };
 
-    public put(url:string, object:any): Promise<Response> {
+    public put(url: string, object: any): Promise<Response> {
         return this.http.put(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise();
     };
 
-    public get(url:string): Promise<Response> { 
+    public get(url: string): Promise<Response> {
         return this.http.get(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
     };
 
-    public delete(url:string): Promise<Response> { 
+    public delete(url: string): Promise<Response> {
         return this.http.delete(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
     };
 }

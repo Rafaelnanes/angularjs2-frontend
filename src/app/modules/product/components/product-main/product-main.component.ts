@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@angular/forms';
 
 import { Product } from './../../models/index';
 import { ProductService, OperationEnum } from './../../index';
-import { ProductMainComponentAbstract } from './product-main-component-abstract';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -12,9 +11,13 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   selector: 'pro-product-main',
   templateUrl: './product-main.component.html'
 })
-export class ProductMainComponent extends ProductMainComponentAbstract implements OnInit {
+export class ProductMainComponent implements OnInit {
 
   public readonly: boolean = false;
+  public productForm: FormGroup;
+  public isSubmitted: boolean = false;
+  public product: Product;
+  protected operation: OperationEnum;
 
   constructor(
     public fb: FormBuilder,
@@ -23,7 +26,6 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
     private route: ActivatedRoute,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef) {
-    super();
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -81,6 +83,14 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
 
   private resetFormValues(): void {
     this.isSubmitted = false;
+  }
+
+  protected buildForm(): void {
+    this.productForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      value: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      id: ['']
+    });
   }
 
 }

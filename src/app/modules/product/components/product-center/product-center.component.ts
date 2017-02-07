@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Product } from './../../models/index';
 import { ProductService } from './../../index';
+import { DefaultHttp } from 'app/modules/shared/index';
 declare var jQuery: any;
 
 @Component({
@@ -21,7 +22,8 @@ export class ProductCenterComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     public toastr: ToastsManager,
-    public vcr: ViewContainerRef) {
+    public vcr: ViewContainerRef,
+    public defaultHttp: DefaultHttp) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -30,9 +32,12 @@ export class ProductCenterComponent implements OnInit {
   }
 
   private refreshProducts() {
+    this.defaultHttp.loading = true;
     this.productService.getAll().then(response => {
+      this.defaultHttp.loading = false;
       this.products = response.json();
     }).catch(response => {
+      this.defaultHttp.loading = false;
       console.log('error', response);
     });
   }
@@ -46,10 +51,12 @@ export class ProductCenterComponent implements OnInit {
   }
 
   public delete(product: Product): void {
+    this.defaultHttp.loading = true;
     this.productService.remove(product).then(response => {
       this.refreshProducts();
       this.toastr.success("Product removed");
-    }).catch(response =>{
+    }).catch(response => {
+      this.defaultHttp.loading = false;
       this.toastr.warning("Error: " + response);
     });
   }
