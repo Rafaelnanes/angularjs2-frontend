@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@angular/forms';
 
-import { Product } from './../../models/index';
+import { Product, ProductType } from './../../models/index';
 import { ProductService, OperationEnum } from './../../index';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -17,12 +17,12 @@ export class ProductMainComponent implements OnInit {
   public productForm: FormGroup;
   public isSubmitted: boolean = false;
   public product: Product;
-  protected operation: OperationEnum;
+  public operation: OperationEnum;
+  public types: ProductType[];
 
   constructor(
     public fb: FormBuilder,
     private productService: ProductService,
-    private router: Router,
     private route: ActivatedRoute,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef) {
@@ -30,6 +30,7 @@ export class ProductMainComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.types = ProductType.getValues();
     this.buildForm();
     this.setFormModelValue();
   }
@@ -68,7 +69,7 @@ export class ProductMainComponent implements OnInit {
       this.toastr.success('Product added');
       this.resetFormValues();
     }).catch(response => {
-      this.toastr.warning('Error: ' + response);
+      this.toastr.error('Error: ' + response);
     });
   }
 
@@ -77,7 +78,7 @@ export class ProductMainComponent implements OnInit {
       this.toastr.success('Product updated');
       this.resetFormValues();
     }).catch(response => {
-      this.toastr.warning('Error: ' + response);
+      this.toastr.error('Error: ' + response);
     });
   }
 
@@ -89,6 +90,7 @@ export class ProductMainComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       value: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      productType: ['', Validators.required],
       id: ['']
     });
   }
