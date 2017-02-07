@@ -1,5 +1,5 @@
 <div class="has-error" *ngIf="(formCtrl.touched || isSubmitted)  && formCtrl.hasError('required')">
-  Name is required
+  {{name}} is required
 </div>
 <div class="has-error" *ngIf="(formCtrl.touched || isSubmitted) && formCtrl.hasError('minlength')">
   Minimum of 2 characters

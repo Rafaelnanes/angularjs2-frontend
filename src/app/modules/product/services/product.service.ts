@@ -27,6 +27,11 @@ export class ProductService {
   public getAll(): Promise<Response> {
     return this.defaultHttp.get(this.MODULE_API_PATH);
   };
+
+  public getAllProductTypes(): Promise<Response> {
+    return this.defaultHttp.get(this.MODULE_API_PATH + "/productTypes");
+  };
+
   public getById(id: number): Promise<Response> {
     return this.defaultHttp.get(this.MODULE_API_PATH + "/" + id);
   };

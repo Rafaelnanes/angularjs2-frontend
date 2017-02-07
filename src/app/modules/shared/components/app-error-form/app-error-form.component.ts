@@ -11,6 +11,9 @@ export class AppErrorFormComponent {
   public formCtrl:FormControl;
 
   @Input()
+  public name:string;
+
+  @Input()
   public isSubmitted:boolean;
 
   constructor() {
