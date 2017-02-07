@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
 
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Product } from './../../models/index';
 import { ProductService } from './../../index';
 declare var jQuery: any;
@@ -16,7 +17,13 @@ export class ProductCenterComponent implements OnInit {
   public products: Product[];
   public productSelected: Product;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    public toastr: ToastsManager,
+    public vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   public ngOnInit() {
     this.refreshProducts();
@@ -41,6 +48,9 @@ export class ProductCenterComponent implements OnInit {
   public delete(product: Product): void {
     this.productService.remove(product).then(response => {
       this.refreshProducts();
+      this.toastr.success("Product removed");
+    }).catch(response =>{
+      this.toastr.warning("Error: " + response);
     });
   }
 

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
-import { Product, ProductType } from './../../models/index';
+import { Product } from './../../models/index';
 import { ProductService, OperationEnum } from './../../index';
 import { ProductMainComponentAbstract } from './product-main-component-abstract';
+
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'pro-product-main',
@@ -18,8 +20,11 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
     public fb: FormBuilder,
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public toastr: ToastsManager,
+    public vcr: ViewContainerRef) {
     super();
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   public ngOnInit(): void {
@@ -32,8 +37,8 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
 
     if (this.operation != OperationEnum.CREATE) {
       let id = this.route.snapshot.params['id'];
-      this.productService.getById(id).then(value => {
-        this.product = value;
+      this.productService.getById(id).then(response => {
+        this.product = response.json();
         this.productForm.patchValue(this.product);
       });
 
@@ -47,14 +52,35 @@ export class ProductMainComponent extends ProductMainComponentAbstract implement
   public send(): void {
     this.isSubmitted = true;
     if (this.productForm.valid) {
-      this.productForm.value.productType = ProductType.getValues()[0];
       if (this.operation == OperationEnum.CREATE) {
-        this.productService.save(this.productForm.value);
+        this.onSave();
       } else {
-        this.productService.update(this.productForm.value);
+        this.onUpdate();
       }
-      //this.router.navigate(["product"]);
+
     }
+  }
+
+  private onSave(): void {
+    this.productService.save(this.productForm.value).then(response => {
+      this.toastr.success('Product added');
+      this.resetFormValues();
+    }).catch(response => {
+      this.toastr.warning('Error: ' + response);
+    });
+  }
+
+  private onUpdate(): void {
+    this.productService.update(this.productForm.value).then(response => {
+      this.toastr.success('Product updated');
+      this.resetFormValues();
+    }).catch(response => {
+      this.toastr.warning('Error: ' + response);
+    });
+  }
+
+  private resetFormValues(): void {
+    this.isSubmitted = false;
   }
 
 }

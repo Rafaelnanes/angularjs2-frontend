@@ -18,10 +18,10 @@ export class ProductService {
   }
 
   public save(product: Product): Promise<Response> {
-    return this.defaultHttp.post(this.MODULE_API_PATH, JSON.stringify(product));
+    return this.defaultHttp.post(this.MODULE_API_PATH, product);
   };
   public update(product: Product): Promise<Response> {
-    return this.defaultHttp.put(this.MODULE_API_PATH, JSON.stringify(product));
+    return this.defaultHttp.put(this.MODULE_API_PATH, product);
   };
 
   public getAll(): Promise<Response> {
