@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { AppSettings } from './../index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
 export class DefaultHttp {
@@ -34,4 +35,11 @@ export class DefaultHttp {
     public delete(url: string): Promise<Response> {
         return this.http.delete(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
     };
+
+    public static handleError(message: string, toastr: ToastsManager, response: Response): void {
+        let error = response.json();
+        for (let value of error.messages) {
+            toastr.error(message + ': Code: ' + error.statusCode + ", message: " + value);
+        }
+    }
 }

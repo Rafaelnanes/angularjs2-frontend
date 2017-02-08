@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@ang
 
 import { Product } from './../../models/index';
 import { ProductService, OperationEnum } from './../../index';
+import { DefaultHttp } from 'app/modules/shared/index';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -39,7 +40,7 @@ export class ProductMainComponent implements OnInit {
     this.productService.getAllProductTypes().then(response => {
       this.productTypes = response.json();
     }).catch(response => {
-      this.toastr.error("Error loading product types: " + response);
+      DefaultHttp.handleError('Error loading product types', this.toastr, response);
     });
   }
 
@@ -76,7 +77,7 @@ export class ProductMainComponent implements OnInit {
       this.toastr.success('Product added');
       this.resetFormValues();
     }).catch(response => {
-      this.toastr.error('Error saving product: ' + response);
+      DefaultHttp.handleError('Error adding product', this.toastr, response);
     });
   }
 
@@ -85,7 +86,7 @@ export class ProductMainComponent implements OnInit {
       this.toastr.success('Product updated');
       this.resetFormValues();
     }).catch(response => {
-      this.toastr.error('Error updating product: ' + response);
+      DefaultHttp.handleError('Error updating product', this.toastr, response);
     });
   }
 
