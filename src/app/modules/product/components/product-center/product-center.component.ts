@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, EventEmitter } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Product } from './../../models/index';
 import { ProductService } from './../../index';
-import { DefaultHttp } from 'app/modules/shared/index';
+import { DefaultHttp, FilterDTO, ResponseServer } from 'app/modules/shared/index';
 declare var jQuery: any;
 
 @Component({
@@ -17,6 +17,8 @@ export class ProductCenterComponent implements OnInit {
 
   public products: Product[];
   public productSelected: Product;
+  public filterDTO: FilterDTO<Product>;
+  public size: number;
 
   constructor(
     private productService: ProductService,
@@ -25,20 +27,37 @@ export class ProductCenterComponent implements OnInit {
     public vcr: ViewContainerRef,
     public defaultHttp: DefaultHttp) {
     this.toastr.setRootViewContainerRef(vcr);
+
   }
 
   public ngOnInit() {
+    this.size = 0;
+    this.setFilterDto();
     this.refreshProducts();
+  }
+
+  public onPageChange(pageChange: number): void {
+    this.filterDTO.setOffset(pageChange);
+    this.refreshProducts();
+  }
+
+  private setFilterDto(): void {
+    this.filterDTO = new FilterDTO<Product>();
+    this.filterDTO.currentPage = 1;
+    this.filterDTO.pageSize = 5;
+    this.filterDTO.setOffset(1);
   }
 
   private refreshProducts() {
     this.defaultHttp.loading = true;
-    this.productService.getAll().then(response => {
+    this.productService.getAllByFilter(this.filterDTO).then(response => {
       this.defaultHttp.loading = false;
-      this.products = response.json();
+      let json = response.json();
+      this.products = json.data;
+      this.size = json.size;
     }).catch(response => {
       this.defaultHttp.loading = false;
-      console.log('error', response);
+      this.toastr.error('Error getting product list', response);
     });
   }
 
@@ -57,7 +76,7 @@ export class ProductCenterComponent implements OnInit {
       this.toastr.success("Product removed");
     }).catch(response => {
       this.defaultHttp.loading = false;
-      this.toastr.warning("Error: " + response);
+      this.toastr.warning("Error to delete the product: " + response);
     });
   }
 
@@ -66,5 +85,15 @@ export class ProductCenterComponent implements OnInit {
     jQuery(document).ready(function () {
       jQuery("#myModal").modal();
     });
+  }
+
+  public orderBy(key:string):void{
+    if(key == this.filterDTO.orderProperty){
+      this.filterDTO.orderAsc = !this.filterDTO.orderAsc;
+    }else{
+      this.filterDTO.orderProperty = key;
+      this.filterDTO.orderAsc = true;
+    }
+    this.refreshProducts();
   }
 }

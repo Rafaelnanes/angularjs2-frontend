@@ -1,19 +1,35 @@
 <div class="jumbotron">
   <h1>Product list</h1>
 
-  <div class="card" *ngFor="let product of products">
-    <div class="card-header">
-      Product : {{product.name}}
-    </div>
-    <div class="card-block">
-      <h4 class="card-title">Value : {{product.value}}</h4>
-      <h5 class="card-title">Type : {{product.productType}}</h5>
-      <button type="button" (click)="info(product)" class="btn btn-primary">Info</button>
-      <button type="button" (click)="update(product)" class="btn btn-warning">Update</button>
-      <button type="button" (click)="openModal(product)" class="btn btn-danger">Delete</button>
-    </div>
-    <br />
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="orderBy('id')">#</th>
+          <th (click)="orderBy('name')">Name</th>
+          <th (click)="orderBy('value')">Value</th>
+          <th (click)="orderBy('productType')">Type</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.value}}</td>
+          <td>{{product.productType}}</td>
+          <td class="text-center">
+              <button type="button" (click)="info(product)" class="btn btn-primary">Info</button>
+              <button type="button" (click)="update(product)" class="btn btn-warning">Update</button>
+              <button type="button" (click)="openModal(product)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <ngl-pagination limit="10" [perPage]="filterDTO.pageSize" (pageChange)="onPageChange($event)" [(page)]="filterDTO.currentPage"
+    [total]="size"></ngl-pagination>
 
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">

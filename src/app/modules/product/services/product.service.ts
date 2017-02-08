@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { Product } from './../models/product';
-import { AppSettings, DefaultHttp } from './../../shared/index';
+import { AppSettings, DefaultHttp, FilterDTO, ResponseServer } from './../../shared/index';
 
 @Injectable()
 export class ProductService {
@@ -26,6 +26,10 @@ export class ProductService {
 
   public getAll(): Promise<Response> {
     return this.defaultHttp.get(this.MODULE_API_PATH);
+  };
+
+  public getAllByFilter(dto: FilterDTO<Product>): Promise<Response> {
+    return this.defaultHttp.post(this.MODULE_API_PATH + "/query", dto);
   };
 
   public getAllProductTypes(): Promise<Response> {
