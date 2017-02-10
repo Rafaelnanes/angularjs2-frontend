@@ -18,15 +18,17 @@ export class AuthenticationService {
             .then(response => {
                 let result: Headers = response.headers;
                 let token: string = result.get(AppSettings.TOKEN_HEADER);
-                localStorage.setItem(AppSettings.CURRENT_USER, JSON.stringify({ username: username, token: token }));
-                localStorage.setItem(AppSettings.TOKEN_HEADER, token);
+                let tokenDecoded = atob(token).split("//");
+                let roles:string = tokenDecoded[0];
+                localStorage.setItem(AppSettings.CURRENT_USER, JSON.stringify({username: username}));
+                localStorage.setItem(AppSettings.TOKEN_HEADER, tokenDecoded[1]);
+                localStorage.setItem(AppSettings.CURRENT_USER_PERMISSIONS, roles);
                 this.router.navigate(['/main']);
             }).catch(this.handleError);
     }
 
     public logout(): void {
-        localStorage.removeItem(AppSettings.CURRENT_USER);
-        localStorage.removeItem(AppSettings.TOKEN_HEADER);
+        localStorage.clear();
         this.router.navigate(['/login']);
     }
 
