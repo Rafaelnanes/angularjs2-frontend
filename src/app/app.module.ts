@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, BaseRequestOptions } from '@angular/http';
 
 import { CoreModule } from './modules/core/index';
-import { SharedModule, AuthGuardService, DefaultHttp } from './modules/shared/index';
+import { ShopModule } from './modules/shop/index';
+import { SharedModule, AuthGuardService, DefaultHttp, GlobalService } from './modules/shared/index';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -16,12 +17,14 @@ import { AppComponent } from './app.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    SharedModule,
     CoreModule,
-    SharedModule
+    ShopModule
   ],
   providers: [
     AuthGuardService,
-    DefaultHttp
+    DefaultHttp,
+    GlobalService
   ],
   bootstrap: [AppComponent]
 })

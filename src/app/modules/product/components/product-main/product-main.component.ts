@@ -4,7 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@ang
 
 import { Product } from './../../models/index';
 import { ProductService, OperationEnum } from './../../index';
-import { DefaultHttp } from 'app/modules/shared/index';
+import { DefaultHttp, GlobalService } from 'app/modules/shared/index';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -26,7 +26,8 @@ export class ProductMainComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     public toastr: ToastsManager,
-    public vcr: ViewContainerRef) {
+    public vcr: ViewContainerRef,
+    public globalService: GlobalService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -73,19 +74,25 @@ export class ProductMainComponent implements OnInit {
   }
 
   private onSave(): void {
+    this.globalService.loading = true;
     this.productService.save(this.productForm.value).then(response => {
       this.toastr.success('Product added');
       this.resetFormValues();
+      this.globalService.loading = false;
     }).catch(response => {
+      this.globalService.loading = false;
       DefaultHttp.handleError('Error adding product', this.toastr, response);
     });
   }
 
   private onUpdate(): void {
+    this.globalService.loading = true;
     this.productService.update(this.productForm.value).then(response => {
       this.toastr.success('Product updated');
       this.resetFormValues();
+      this.globalService.loading = false;
     }).catch(response => {
+      this.globalService.loading = false;
       DefaultHttp.handleError('Error updating product', this.toastr, response);
     });
   }

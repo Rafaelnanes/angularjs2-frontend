@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DefaultHttp } from './modules/shared/index';
+import { GlobalService } from './modules/shared/index';
 
 @Component({
   selector: 'pro-app',
@@ -8,6 +8,6 @@ import { DefaultHttp } from './modules/shared/index';
 })
 export class AppComponent {
 
-    constructor(public defaultHttp: DefaultHttp){
+    constructor(public globalService: GlobalService){
     }
 }

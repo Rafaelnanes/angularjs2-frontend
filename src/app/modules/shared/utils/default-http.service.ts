@@ -11,7 +11,6 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Injectable()
 export class DefaultHttp {
 
-    public loading: boolean = false;
     protected headers: Headers;
 
     constructor(private http: Http, private router: Router) {

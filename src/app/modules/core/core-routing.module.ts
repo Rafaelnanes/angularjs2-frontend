@@ -16,6 +16,7 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   { path: 'product', loadChildren: 'app/modules/product/product.module#ProductModule' },
+  { path: 'shop', loadChildren: 'app/modules/shop/shop.module#ShopModule' },
   {
     path: '',
     redirectTo: '/main',

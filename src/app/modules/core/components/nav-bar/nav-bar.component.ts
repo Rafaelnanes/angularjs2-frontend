@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from './../../../shared/index';
-/*
-import * as lodash from 'lodash'; //npm install --save @types/lodash
-declare var jsSHA: any; //local library*/
+import { AuthenticationService, AppSettings, GlobalService } from 'app/modules/shared/index';
 
 @Component({
   selector: 'pro-nav-bar',
@@ -10,25 +7,12 @@ declare var jsSHA: any; //local library*/
 })
 export class NavBarComponent {
 
- /* shaObj: any;
-  hash: String;*/
+  public currentUser: string;
+  public isUserLogged: boolean;
 
-  constructor(private authService: AuthenticationService) {
-    /*this.shaObj = new jsSHA("SHA-512", "TEXT");
-    this.shaObj.update("This is a test");
-    this.hash = this.shaObj.getHash("HEX");
-    console.log('local library - hash: ', this.hash);
-
-    var objA = {
-      "name": "colin"
-    }
-
-    var objB = lodash.cloneDeep(objA);
-    objB === objA // false
-
-    console.log('external library - lodash: ', 'objB: ' + objB.name + ", objA: " + objA.name);*/
+  constructor(private authService: AuthenticationService, public global: GlobalService) {
+    
   }
-
 
   public logout(): void {
     this.authService.logout();

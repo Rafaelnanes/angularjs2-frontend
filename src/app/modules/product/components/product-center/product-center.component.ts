@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Product } from './../../models/index';
 import { ProductService } from './../../index';
-import { DefaultHttp, FilterDTO, ResponseServer } from 'app/modules/shared/index';
+import { GlobalService, DefaultHttp, FilterDTO, ResponseServer } from 'app/modules/shared/index';
 declare var jQuery: any;
 
 @Component({
@@ -25,7 +25,8 @@ export class ProductCenterComponent implements OnInit {
     private router: Router,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
-    public defaultHttp: DefaultHttp) {
+    public defaultHttp: DefaultHttp,
+    private globalService: GlobalService) {
     this.toastr.setRootViewContainerRef(vcr);
 
   }
@@ -49,14 +50,14 @@ export class ProductCenterComponent implements OnInit {
   }
 
   private refreshProducts() {
-    this.defaultHttp.loading = true;
+    this.globalService.loading = true;
     this.productService.getAllByFilter(this.filterDTO).then(response => {
-      this.defaultHttp.loading = false;
+      this.globalService.loading = false;
       let json = response.json();
       this.products = json.data;
       this.size = json.size;
     }).catch(response => {
-      this.defaultHttp.loading = false;
+      this.globalService.loading = false;
       DefaultHttp.handleError('Error getting product list', this.toastr, response);
     });
   }
@@ -70,12 +71,12 @@ export class ProductCenterComponent implements OnInit {
   }
 
   public delete(product: Product): void {
-    this.defaultHttp.loading = true;
+    this.globalService.loading = true;
     this.productService.remove(product).then(response => {
       this.refreshProducts();
       this.toastr.success("Product removed");
     }).catch(response => {
-      this.defaultHttp.loading = false;
+      this.globalService.loading = false;
       DefaultHttp.handleError('Error to delete the product', this.toastr, response);
     });
   }
@@ -87,10 +88,10 @@ export class ProductCenterComponent implements OnInit {
     });
   }
 
-  public orderBy(key:string):void{
-    if(key == this.filterDTO.orderProperty){
+  public orderBy(key: string): void {
+    if (key == this.filterDTO.orderProperty) {
       this.filterDTO.orderAsc = !this.filterDTO.orderAsc;
-    }else{
+    } else {
       this.filterDTO.orderProperty = key;
       this.filterDTO.orderAsc = true;
     }
