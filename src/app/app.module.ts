@@ -18,8 +18,7 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     HttpModule,
     SharedModule,
-    CoreModule,
-    ShopModule
+    CoreModule
   ],
   providers: [
     AuthGuardService,

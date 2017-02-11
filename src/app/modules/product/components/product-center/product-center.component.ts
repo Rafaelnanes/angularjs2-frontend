@@ -34,7 +34,6 @@ export class ProductCenterComponent implements OnInit {
   public ngOnInit() {
     this.size = 0;
     this.setFilterDto();
-    this.refreshProducts();
   }
 
   public onPageChange(pageChange: number): void {
