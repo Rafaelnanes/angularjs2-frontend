@@ -9,9 +9,14 @@ export class GlobalService {
   public isUserLogged: boolean;
   public loading: boolean;
 
-  constructor() { 
+  //ROLES
+  public USER_ROLE_ADMIN: string = AppSettings.USER_ROLE_ADMIN;
+  public USER_ROLE_VISITOR: string = AppSettings.USER_ROLE_VISITOR;
+  public USER_ROLE_CUSTOMER: string = AppSettings.USER_ROLE_CUSTOMER;
+
+  constructor() {
     this.currentUser = localStorage.getItem(AppSettings.CURRENT_USER);
-    if(this.currentUser){
+    if (this.currentUser) {
       this.isUserLogged = true;
     }
   }
@@ -24,6 +29,15 @@ export class GlobalService {
     let user: string = localStorage.getItem(AppSettings.CURRENT_USER);
     this.isUserLogged = true;
     this.currentUser = user;
+  }
+
+  public hasPermission(permissionKey: string): boolean {
+    for (let permission of AppSettings.getUserPermissions()) {
+      if (permission == permissionKey) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

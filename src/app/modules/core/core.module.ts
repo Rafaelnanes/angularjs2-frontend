@@ -4,6 +4,7 @@ import { CoreRoutingModule } from './core-routing.module';//TODO
 import { ProductModule } from './../product/index';
 import { AuthenticationService, SharedModule } from './../shared/index';
 import { NavBarComponent, PageNotFoundComponent, MainComponent, LoginComponent } from './components/index';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { NavBarComponent, PageNotFoundComponent, MainComponent, LoginComponent }
     NavBarComponent,
     MainComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    UnauthorizedComponent
   ],
   exports: [
     NavBarComponent

@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AppSettings } from './index';
+import { AbstractAuthGuard } from './abstract-auth-guard';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService extends AbstractAuthGuard implements CanActivate {
 
-    constructor(private router: Router) { }
-
-    canActivate() {
-        if (localStorage.getItem(AppSettings.CURRENT_USER)) {
-            return true;
-        }
-
-        this.router.navigate(['/login']);
-        return false;
+    constructor(protected router: Router) {
+        super(router);
     }
+
+    public canActivate(): boolean {
+        return this.isUserLogged();
+    }
+
 }

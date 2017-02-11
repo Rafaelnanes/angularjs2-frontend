@@ -5,7 +5,7 @@ import { HttpModule, BaseRequestOptions } from '@angular/http';
 
 import { CoreModule } from './modules/core/index';
 import { ShopModule } from './modules/shop/index';
-import { SharedModule, AuthGuardService, DefaultHttp, GlobalService } from './modules/shared/index';
+import { SharedModule, AuthGuardService, AuthGuardAdminService, DefaultHttp, GlobalService } from './modules/shared/index';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -23,6 +23,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     AuthGuardService,
+    AuthGuardAdminService,
     DefaultHttp,
     GlobalService
   ],

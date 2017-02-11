@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PageNotFoundComponent, LoginComponent, MainComponent } from './components/index';
+import { PageNotFoundComponent, LoginComponent, MainComponent, UnauthorizedComponent } from './components/index';
 import { AuthGuardService } from './../shared/index';
 
 const appRoutes: Routes = [
@@ -17,6 +17,7 @@ const appRoutes: Routes = [
   },
   { path: 'product', loadChildren: 'app/modules/product/product.module#ProductModule' },
   { path: 'shop', loadChildren: 'app/modules/shop/shop.module#ShopModule' },
+  { path: '403', component: UnauthorizedComponent },
   {
     path: '',
     redirectTo: '/main',

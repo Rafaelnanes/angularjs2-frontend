@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Product } from './../../models/index';
 import { ProductService } from './../../index';
-import { GlobalService, DefaultHttp, FilterDTO, ResponseServer } from 'app/modules/shared/index';
+import { GlobalService, DefaultHttp, FilterDTO, ResponseServer, AppSettings } from 'app/modules/shared/index';
 declare var jQuery: any;
 
 @Component({
@@ -26,7 +26,7 @@ export class ProductCenterComponent implements OnInit {
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
     public defaultHttp: DefaultHttp,
-    private globalService: GlobalService) {
+    public globalService: GlobalService) {
     this.toastr.setRootViewContainerRef(vcr);
 
   }
