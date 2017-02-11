@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ShopMainComponent } from './components/index';
-import { AuthGuardService, OperationEnum } from './index';
+import { AuthGuardService } from 'app/modules/shared/index';
 
 const appRoutes: Routes = [
   {

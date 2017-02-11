@@ -9,7 +9,12 @@ export class GlobalService {
   public isUserLogged: boolean;
   public loading: boolean;
 
-  constructor() { }
+  constructor() { 
+    this.currentUser = localStorage.getItem(AppSettings.CURRENT_USER);
+    if(this.currentUser){
+      this.isUserLogged = true;
+    }
+  }
 
   public removeUserSession(): void {
     this.isUserLogged = false;
