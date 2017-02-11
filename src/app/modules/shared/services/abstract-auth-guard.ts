@@ -13,4 +13,18 @@ export abstract class AbstractAuthGuard {
         this.router.navigate(['/login']);
         return false;
     }
+
+    protected canActivateByRole(role: string): boolean {
+        let isActivate: boolean = this.isUserLogged();
+        if (isActivate) {
+            for (let permission of AppSettings.getUserPermissions()) {
+                if (permission == role) {
+                    return true;
+                }
+            }
+            this.router.navigate(['/403']);
+
+        }
+        return isActivate;
+    }
 }

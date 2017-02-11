@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { User, AuthenticationService } from './../../../shared/index';
+import { Component, ViewContainerRef } from '@angular/core';
+import { User, AuthenticationService, DefaultHttp } from 'app/modules/shared/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   templateUrl: './login.component.html',
@@ -7,13 +8,23 @@ import { User, AuthenticationService } from './../../../shared/index';
 })
 export class LoginComponent {
 
-  public user: User = new User("admin", "password");
+  public user: User = new User("adm", "adm");
 
-  constructor(private authService: AuthenticationService) {
+  constructor(
+    private authService: AuthenticationService,
+    public toastr: ToastsManager,
+    public vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   public onSubmit(): void {
-    this.authService.login(this.user.login, this.user.password);
+    this.authService.login(this.user.login, this.user.password).catch(response => {
+      if(response.status == 401){
+        this.toastr.error("Login or password invalid.");
+      }else{
+        this.toastr.error("Error please contact support");
+      }
+    });
   }
 
 }

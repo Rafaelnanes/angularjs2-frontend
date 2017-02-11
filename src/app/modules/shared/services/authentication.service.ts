@@ -13,9 +13,9 @@ export class AuthenticationService {
     constructor(private http: Http, private router: Router, private global: GlobalService) {
     }
 
-    public login(username: string, password: string): void {
+    public login(username: string, password: string): Promise<Response> {
         this.global.loading = true;
-        this.http.post(AppSettings.BASE_URL + 'login', JSON.stringify({ username: username, password: password }))
+        return this.http.post(AppSettings.BASE_URL + 'login', JSON.stringify({ username: username, password: password }))
             .toPromise()
             .then(response => {
                 this.global.loading = false;
@@ -28,7 +28,11 @@ export class AuthenticationService {
                 localStorage.setItem(AppSettings.CURRENT_USER_PERMISSIONS, roles);
                 this.global.logUser();
                 this.router.navigate(['/main']);
-            }).catch(this.handleError);
+                return null;
+            }).catch(response => {
+                this.global.loading = false;
+                return Promise.reject(response);
+            });
     }
 
     public logout(): void {
@@ -37,9 +41,4 @@ export class AuthenticationService {
         this.router.navigate(['/login']);
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
-        this.global.loading = false;
-        return Promise.reject(error.message || error);
-    }
 }

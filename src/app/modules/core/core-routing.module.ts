@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PageNotFoundComponent, LoginComponent, MainComponent, UnauthorizedComponent } from './components/index';
-import { AuthGuardService } from './../shared/index';
+import { AuthGuardVisitorService } from './../shared/index';
 
 const appRoutes: Routes = [
   {
     path: 'main',
     component: MainComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardVisitorService]
   },
   {
     path: 'login',
