@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { CoreRoutingModule } from './core-routing.module';//TODO
 import { ProductModule } from './../product/index';
-import { AuthenticationService, SharedModule } from './../shared/index';
+import { SharedModule } from './../shared/index';
 import { NavBarComponent, PageNotFoundComponent, MainComponent, LoginComponent } from './components/index';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
@@ -22,7 +22,7 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
     NavBarComponent
   ],
   providers: [
-    AuthenticationService
+    
   ]
 })
 export class CoreModule { }

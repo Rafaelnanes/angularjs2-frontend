@@ -5,7 +5,7 @@ import { HttpModule, BaseRequestOptions } from '@angular/http';
 
 import { CoreModule } from './modules/core/index';
 import { ShopModule } from './modules/shop/index';
-import { SharedModule, AuthGuardService, AuthGuardAdminService, DefaultHttp, GlobalService, AuthGuardCustomerService, AuthGuardVisitorService } from './modules/shared/index';
+import { SharedModule, AuthGuardService, AuthGuardAdminService, DefaultHttp, GlobalService, AuthGuardCustomerService, AuthGuardVisitorService, AuthenticationService } from './modules/shared/index';
 import { AppComponent } from './app.component';
 
 //only services from Shared module
@@ -13,7 +13,10 @@ const sharedProviders: any[] = [
   AuthGuardService,
   AuthGuardAdminService,
   AuthGuardCustomerService,
-  AuthGuardVisitorService
+  AuthGuardVisitorService,
+  DefaultHttp,
+  GlobalService,
+  AuthenticationService
 ]
 
 @NgModule({
@@ -29,9 +32,7 @@ const sharedProviders: any[] = [
     CoreModule
   ],
   providers: [
-    sharedProviders,
-    DefaultHttp,
-    GlobalService
+    sharedProviders
   ],
   bootstrap: [AppComponent]
 })

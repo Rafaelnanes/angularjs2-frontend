@@ -1,5 +1,5 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { User, AuthenticationService, DefaultHttp } from 'app/modules/shared/index';
+import { User, AuthenticationService } from 'app/modules/shared/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({

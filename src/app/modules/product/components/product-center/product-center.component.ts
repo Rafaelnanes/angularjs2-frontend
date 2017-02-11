@@ -49,14 +49,11 @@ export class ProductCenterComponent implements OnInit {
   }
 
   private refreshProducts() {
-    this.globalService.loading = true;
     this.productService.getAllByFilter(this.filterDTO).then(response => {
-      this.globalService.loading = false;
       let json = response.json();
       this.products = json.data;
       this.size = json.size;
     }).catch(response => {
-      this.globalService.loading = false;
       DefaultHttp.handleError('Error getting product list', this.toastr, response);
     });
   }
@@ -70,12 +67,10 @@ export class ProductCenterComponent implements OnInit {
   }
 
   public delete(product: Product): void {
-    this.globalService.loading = true;
     this.productService.remove(product).then(response => {
       this.refreshProducts();
       this.toastr.success("Product removed");
     }).catch(response => {
-      this.globalService.loading = false;
       DefaultHttp.handleError('Error to delete the product', this.toastr, response);
     });
   }

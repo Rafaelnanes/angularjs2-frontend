@@ -31,7 +31,7 @@ export class AuthenticationService {
                 return null;
             }).catch(response => {
                 this.global.loading = false;
-                return Promise.reject(response);
+                return Promise.reject<Response>(response);
             });
     }
 

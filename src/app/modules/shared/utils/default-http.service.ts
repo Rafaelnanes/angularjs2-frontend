@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { AppSettings } from './../index';
+import { AppSettings, GlobalService } from './../index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Injectable()
@@ -13,27 +13,39 @@ export class DefaultHttp {
 
     protected headers: Headers;
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private globalService: GlobalService) {
         this.headers = new Headers();
         this.headers.append("Authorization", localStorage.getItem(AppSettings.TOKEN_HEADER));
         this.headers.append("Content-Type", "application/json");
     }
 
     public post(url: string, object: any): Promise<Response> {
-        return this.http.post(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise();
+        return this.interceptPromise(this.http.post(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise());;
     };
 
     public put(url: string, object: any): Promise<Response> {
-        return this.http.put(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise();
+        return this.interceptPromise(this.http.put(AppSettings.BASE_URL + url, JSON.stringify(object), { headers: this.headers }).toPromise());
     };
 
     public get(url: string): Promise<Response> {
-        return this.http.get(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
+        return this.interceptPromise(this.http.get(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise());
     };
 
     public delete(url: string): Promise<Response> {
-        return this.http.delete(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise();
+        return this.interceptPromise(this.http.delete(AppSettings.BASE_URL + url, { headers: this.headers }).toPromise());
     };
+
+    private interceptPromise(promise: Promise<Response>): Promise<Response> {
+        this.globalService.loading = true;
+        promise.then(response => {
+            this.globalService.loading = false;
+            return response;
+        }).catch(response => {
+            this.globalService.loading = false;
+            return response;
+        });
+        return promise;
+    }
 
     public static handleError(message: string, toastr: ToastsManager, response: Response): void {
         let error = response.json();
