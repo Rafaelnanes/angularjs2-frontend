@@ -6,34 +6,30 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { AppSettings } from './index';
 import { GlobalService } from './global.service';
+import { DefaultHttp } from './../utils/default-http.service';
+import { User } from './../models/user';
 
 @Injectable()
 export class AuthenticationService {
 
-    constructor(private http: Http, private router: Router, private global: GlobalService) {
+    constructor(private router: Router, private global: GlobalService, public defaultHtt: DefaultHttp) {
     }
 
-    public login(username: string, password: string): Promise<Response> {
-        this.global.loading = true;
-        return this.http.post(AppSettings.BASE_URL + 'login', JSON.stringify({ username: username, password: password }))
-            .toPromise()
+    public login(user: User): Promise<Response> {
+        return this.defaultHtt.post('login', user)
             .then(response => {
-                this.global.loading = false;
                 let result: Headers = response.headers;
                 let token: string = result.get(AppSettings.TOKEN_HEADER);
                 let tokenDecoded = atob(token).split("//");
                 let roles: string = tokenDecoded[0];
-                localStorage.setItem(AppSettings.CURRENT_USER, username);
+                localStorage.setItem(AppSettings.CURRENT_USER, user.username);
                 localStorage.setItem(AppSettings.TOKEN_HEADER, tokenDecoded[1]);
                 localStorage.setItem(AppSettings.CURRENT_USER_PERMISSIONS, roles);
                 this.global.logUser();
-                this.router.navigate(['/main']);
-                return null;
-            }).catch(response => {
-                this.global.loading = false;
-                return Promise.reject<Response>(response);
+                return response;
             });
     }
+
 
     public logout(): void {
         localStorage.clear();

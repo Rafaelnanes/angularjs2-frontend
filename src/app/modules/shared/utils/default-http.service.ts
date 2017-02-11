@@ -5,15 +5,16 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { AppSettings, GlobalService } from './../index';
+import { AppSettings } from './../index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { GlobalService} from './../services/global.service';
 
 @Injectable()
 export class DefaultHttp {
 
     protected headers: Headers;
 
-    constructor(private http: Http, private router: Router, private globalService: GlobalService) {
+    constructor(private http: Http, private router: Router, public globalService: GlobalService) {
         this.headers = new Headers();
         this.headers.append("Authorization", localStorage.getItem(AppSettings.TOKEN_HEADER));
         this.headers.append("Content-Type", "application/json");
