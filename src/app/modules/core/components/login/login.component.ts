@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { User, AuthenticationService } from './../../../shared/index';
 
 @Component({
-  selector: 'pro-login',
   templateUrl: './login.component.html',
   styles: []
 })
