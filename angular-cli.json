@@ -22,7 +22,7 @@
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
-        "assets/css/font-awesome.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
         "assets/css/salesforce-lightning-design-system.css"
       ],
       "scripts": [
