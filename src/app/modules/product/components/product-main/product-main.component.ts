@@ -4,7 +4,8 @@ import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@ang
 import { DatePipe } from '@angular/common';
 
 import { Product } from './../../models/index';
-import { ProductService, OperationEnum } from './../../index';
+import { OperationEnum } from './../../index';
+import { ProductService } from './../../services/product.service';
 import { DefaultHttp, GlobalService } from 'app/modules/shared/index';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -55,7 +56,7 @@ export class ProductMainComponent implements OnInit {
       let id = this.route.snapshot.params['id'];
       this.productService.getById(id).then(response => {
         this.product = response.json();
-        if (!lodash.isEmpty(this.product.date)) {
+        if (this.product.date != null) {
           this.product.date = this.formatDate(new Date(this.product.date));
         }
         this.productForm.patchValue(this.product);
@@ -125,8 +126,8 @@ export class ProductMainComponent implements OnInit {
 
   private watchDateChange(): void {
     this.productForm.get('date').valueChanges.subscribe(data => {
-      if (data != null) {
-        let str: any = data;
+      let str: any = data;
+      if (str != null) {
         str = str.split('-');
         this.date = new Date(str[0], str[1] - 1, str[2]);
       }

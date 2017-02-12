@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';//TODO
 import { ProductCenterComponent, ProductMainComponent } from './components/index';
 import { SharedModule } from './../shared/index';
-import { ProductService } from './index';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   imports: [

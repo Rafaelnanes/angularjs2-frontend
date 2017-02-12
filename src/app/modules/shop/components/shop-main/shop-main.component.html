@@ -1,7 +1,36 @@
 <div class="jumbotron">
-  <h1>Shop Main</h1>
-  <p>Let's start the cart.</p>
-  <p>
-    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-  </p>
+  <div class="container"><button type="button" (click)="openModal()" class="btn btn-link pull-right"><i class="fa fa-shopping-cart"></i> See my cart</button></div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="orderBy('id')"><i class="fa fa-sort" aria-hidden="true"></i> #</th>
+          <th (click)="orderBy('name')"><i class="fa fa-sort" aria-hidden="true"></i> Name</th>
+          <th (click)="orderBy('value')"><i class="fa fa-sort" aria-hidden="true"></i> Value</th>
+          <th (click)="orderBy('productType')"><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
+          <th (click)="orderBy('date')"><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.value}}</td>
+          <td>{{product.productType}}</td>
+          <td>{{product.date | date:"dd/MM/yyyy"}}</td>
+          <td class="text-center">
+            <button type="button" (click)="addToCart(product)" class="btn btn-default"><i class="fa fa-plus-square"></i> Add to cart</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ngl-pagination limit="10" [perPage]="filterDTO.pageSize" (pageChange)="onPageChange($event)" [(page)]="filterDTO.currentPage"
+    [total]="size"></ngl-pagination>
+
+    <crt-my-cart class="modal fade" id="myCartModal" role="dialog"></crt-my-cart>
+
 </div>

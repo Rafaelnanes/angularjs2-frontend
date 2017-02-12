@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewContainerRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Product } from './../../models/index';
-import { ProductService } from './../../index';
-import { GlobalService, DefaultHttp, FilterDTO, ResponseServer, AppSettings } from 'app/modules/shared/index';
+import { ProductService } from './../../services/product.service';
+import { GlobalService, DefaultHttp, FilterDTO } from 'app/modules/shared/index';
 declare var jQuery: any;
 
 @Component({
