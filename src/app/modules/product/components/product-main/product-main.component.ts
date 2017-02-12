@@ -38,7 +38,6 @@ export class ProductMainComponent implements OnInit {
     this.buildForm();
     this.setFormModelValue();
     this.getAllProductTypes();
-    this.date = new Date();
     this.watchDateChange();
   }
 
@@ -56,7 +55,7 @@ export class ProductMainComponent implements OnInit {
       let id = this.route.snapshot.params['id'];
       this.productService.getById(id).then(response => {
         this.product = response.json();
-        if (this.product.date != null) {
+        if (!lodash.isEmpty(this.product.date)) {
           this.product.date = this.formatDate(new Date(this.product.date));
         }
         this.productForm.patchValue(this.product);
@@ -72,18 +71,21 @@ export class ProductMainComponent implements OnInit {
   public send(): void {
     this.isSubmitted = true;
     if (this.productForm.valid) {
+      let product: Product = this.productForm.value;
+      if (!lodash.isEmpty(product.date)) {
+        product.date = this.date.getTime().toString();
+      }
       if (this.operation == OperationEnum.CREATE) {
-        this.onSave();
+        this.onSave(product);
       } else {
-        this.onUpdate();
+        this.onUpdate(product);
       }
 
     }
   }
 
-  private onSave(): void {
-    let product: Product = this.productForm.value;
-    product.date = this.date.getTime().toString();
+  private onSave(product: Product): void {
+
     this.productService.save(product).then(response => {
       this.toastr.success('Product added');
       this.resetFormValues();
@@ -92,9 +94,7 @@ export class ProductMainComponent implements OnInit {
     });
   }
 
-  private onUpdate(): void {
-    let product: Product = this.productForm.value;
-    product.date = this.date.getTime().toString();
+  private onUpdate(product: Product): void {
     this.productService.update(product).then(response => {
       this.toastr.success('Product updated');
       this.resetFormValues();
@@ -118,21 +118,29 @@ export class ProductMainComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       value: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       productType: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [''],
       id: ['']
     });
   }
 
   private watchDateChange(): void {
     this.productForm.get('date').valueChanges.subscribe(data => {
-      let str: any = data;
-      str = str.split('/');
-      this.date = new Date(str[2], str[1] - 1, str[0]);
+      if (data != null) {
+        let str: any = data;
+        str = str.split('-');
+        this.date = new Date(str[0], str[1] - 1, str[2]);
+      }
     });
   }
 
   private formatDate(date: Date): string {
-    return new DatePipe('en-US').transform(date, 'dd/MM/yyyy');
+    return new DatePipe('en-US').transform(date, 'yyyy-MM-dd');
+  }
+
+  private changeVisibleDatePicker(): void {
+    setTimeout(() => {
+      this.isShowDatePicker = false;
+    }, 100);
   }
 
 }
