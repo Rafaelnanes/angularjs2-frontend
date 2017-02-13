@@ -14,17 +14,17 @@
               <th><i class="fa fa-sort" aria-hidden="true"></i> Value</th>
               <th><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
               <th><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
-              <th><i class="fa fa-sort" aria-hidden="true"></i> Size</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Quantity</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let cp of cartGlobalService.userCart">
               <td>{{cp.product.id}}</td>
               <td>{{cp.product.name}}</td>
-              <td>{{cp.product.value}}</td>
+              <td>{{cp.product.value | currency:globalService.currencyCode:globalService.symbolDisplay}}</td>
               <td>{{cp.product.productType}}</td>
-              <td>{{cp.product.date}}</td>
-              <td>{{cp.size}}</td>
+              <td>{{cp.product.date | date:globalService.datePipe}}</td>
+              <td>{{cp.quantity}}</td>
             </tr>
           </tbody>
         </table>
@@ -32,6 +32,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" [hidden]="cartGlobalService.userCart.length == 0" (click)="saveCart()" class="btn btn-success" >Save cart</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal">Payment</button>
     </div>
   </div>

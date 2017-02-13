@@ -7,6 +7,7 @@ import { SharedModule } from './../shared/index';
 import { MyCartComponent } from './components/my-cart/my-cart.component';
 
 import { ProductService } from 'app/modules/product/index';
+import { UserProductService } from './services/index';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ProductService } from 'app/modules/product/index';
     MyCartComponent
   ],
   providers: [
-    ProductService
+    ProductService,
+    UserProductService
   ]
 })
 export class ShopModule { }

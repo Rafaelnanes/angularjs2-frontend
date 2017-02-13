@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ProductCart } from './../models/index';
+import { UserProduct } from './../models/index';
 import { Product } from 'app/modules/product/index';
 import { AppSettings } from 'app/modules/shared/index';
 import * as lodash from 'lodash';
@@ -8,7 +8,7 @@ import * as lodash from 'lodash';
 @Injectable()
 export class CartGlobalService {
 
-  public userCart: ProductCart[];
+  public userCart: UserProduct[];
 
   constructor() {
     let userCartStr: string = localStorage.getItem(AppSettings.USER_CART);
@@ -22,12 +22,12 @@ export class CartGlobalService {
     let isExists = false;
     for (let pc of this.userCart) {
       if (pc.product.id == product.id) {
-        pc.size++;
+        pc.quantity++;
         isExists = true;
       }
     }
     if (!isExists) {
-      this.userCart.push(new ProductCart(product, 1));
+      this.userCart.push(new UserProduct(product, 1));
     }
     localStorage.setItem(AppSettings.USER_CART, JSON.stringify(this.userCart));
   }

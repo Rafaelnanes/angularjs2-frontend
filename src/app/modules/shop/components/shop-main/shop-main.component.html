@@ -17,9 +17,9 @@
         <tr *ngFor="let product of products">
           <td>{{product.id}}</td>
           <td>{{product.name}}</td>
-          <td>{{product.value}}</td>
+          <td>{{product.value | currency:globalService.currencyCode:globalService.symbolDisplay}}</td>
           <td>{{product.productType}}</td>
-          <td>{{product.date | date:"dd/MM/yyyy"}}</td>
+          <td>{{product.date | date:globalService.datePipe}}</td>
           <td class="text-center">
             <button type="button" (click)="addToCart(product)" class="btn btn-default"><i class="fa fa-plus-square"></i> Add to cart</button>
           </td>
