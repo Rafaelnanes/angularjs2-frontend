@@ -10,6 +10,7 @@ import { DefaultHttp, GlobalService } from 'app/modules/shared/index';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import * as lodash from 'lodash';
+declare var jQuery: any;
 
 @Component({
   selector: 'pro-product-main',
@@ -17,6 +18,7 @@ import * as lodash from 'lodash';
 })
 export class ProductMainComponent implements OnInit {
 
+  public mask = [/[0-3]/, /[0-9]/, '/',/[0-1]/, /[0-9]/, '/', /[1-2]/, /\d/, /\d/, /\d/];
   public readonly: boolean = false;
   public productForm: FormGroup;
   public isSubmitted: boolean = false;
@@ -128,14 +130,14 @@ export class ProductMainComponent implements OnInit {
     this.productForm.get('date').valueChanges.subscribe(data => {
       let str: any = data;
       if (str != null) {
-        str = str.split('-');
-        this.date = new Date(str[0], str[1] - 1, str[2]);
+        str = str.split('/');
+        this.date = new Date(str[2], str[1] - 1, str[0]);
       }
     });
   }
 
   private formatDate(date: Date): string {
-    return new DatePipe('en-US').transform(date, 'yyyy-MM-dd');
+    return new DatePipe('pt-BR').transform(date, 'dd-MM-yyyy');
   }
 
   private changeVisibleDatePicker(): void {

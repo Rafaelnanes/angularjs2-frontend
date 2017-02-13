@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, BaseRequestOptions } from '@angular/http';
 
@@ -34,7 +34,8 @@ const sharedProviders: any[] = [
   ],
   providers: [
     sharedProviders,
-    CartGlobalService
+    CartGlobalService,
+    { provide: LOCALE_ID, useValue: "en-US" }
   ],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { AppErrorFormComponent } from './components/index';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { NglModule } from 'ng-lightning/ng-lightning';
+import { TextMaskModule } from 'angular2-text-mask';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   imports: [
@@ -12,7 +14,9 @@ import { NglModule } from 'ng-lightning/ng-lightning';
     FormsModule,
     RouterModule,
     ToastModule.forRoot(),
-    NglModule.forRoot()
+    NglModule.forRoot(),
+    TextMaskModule,
+    CurrencyMaskModule
   ],
   declarations: [
     AppErrorFormComponent
@@ -24,7 +28,9 @@ import { NglModule } from 'ng-lightning/ng-lightning';
     RouterModule,
     CommonModule,
     NglModule,
-    AppErrorFormComponent
+    AppErrorFormComponent,
+    TextMaskModule,
+    CurrencyMaskModule
   ]
 })
 export class SharedModule {

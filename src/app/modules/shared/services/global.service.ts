@@ -9,6 +9,13 @@ export class GlobalService {
   public isUserLogged: boolean;
   public loading: boolean;
 
+  //currency pipe
+  public currencyCode: string = 'USD';
+  public symbolDisplay: boolean = true;
+
+  //date pipe
+  public datePipe:string = "dd/MM/yyyy";
+
   //ROLES
   public USER_ROLE_ADMIN: string = AppSettings.USER_ROLE_ADMIN;
   public USER_ROLE_VISITOR: string = AppSettings.USER_ROLE_VISITOR;
