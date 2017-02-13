@@ -7,6 +7,7 @@ import { CoreModule } from './modules/core/index';
 import { ShopModule } from './modules/shop/index';
 import { SharedModule, AuthGuardService, AuthGuardAdminService, DefaultHttp, GlobalService, AuthGuardCustomerService, AuthGuardVisitorService, AuthenticationService } from './modules/shared/index';
 import { AppComponent } from './app.component';
+import { CartGlobalService } from './modules/shop/services/cart-global.service';
 
 //only services from Shared module
 const sharedProviders: any[] = [
@@ -32,7 +33,8 @@ const sharedProviders: any[] = [
     CoreModule
   ],
   providers: [
-    sharedProviders
+    sharedProviders,
+    CartGlobalService
   ],
   bootstrap: [AppComponent]
 })

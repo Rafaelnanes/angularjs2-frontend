@@ -8,11 +8,12 @@ import { AppSettings } from './index';
 import { GlobalService } from './global.service';
 import { DefaultHttp } from './../utils/default-http.service';
 import { User } from './../models/user';
+import { CartGlobalService } from 'app/modules/shop/services/cart-global.service';
 
 @Injectable()
 export class AuthenticationService {
 
-    constructor(private router: Router, private global: GlobalService, public defaultHtt: DefaultHttp) {
+    constructor(private router: Router, private global: GlobalService, public defaultHtt: DefaultHttp, private cartGlobalService: CartGlobalService) {
     }
 
     public login(user: User): Promise<Response> {
@@ -32,7 +33,12 @@ export class AuthenticationService {
 
 
     public logout(): void {
+        localStorage.removeItem(AppSettings.CURRENT_USER);
+        localStorage.removeItem(AppSettings.TOKEN_HEADER);
+        localStorage.removeItem(AppSettings.CURRENT_USER_PERMISSIONS);
+        localStorage.removeItem(AppSettings.USER_CART);
         localStorage.clear();
+        this.cartGlobalService.resetCart();
         this.global.removeUserSession();
         this.router.navigate(['/login']);
     }

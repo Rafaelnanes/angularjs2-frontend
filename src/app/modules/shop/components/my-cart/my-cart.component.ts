@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CartGlobalService } from './../../services/index';
+
 @Component({
   selector: 'crt-my-cart',
-  templateUrl: './my-cart.component.html',
-  styles: []
+  templateUrl: './my-cart.component.html'
 })
 export class MyCartComponent implements OnInit {
 
-  constructor() { }
+  constructor(public cartGlobalService:CartGlobalService) { }
 
   ngOnInit() {
   }

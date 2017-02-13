@@ -9,20 +9,22 @@
         <table class="table">
           <thead>
             <tr>
-              <th (click)="orderBy('id')"><i class="fa fa-sort" aria-hidden="true"></i> #</th>
-              <th (click)="orderBy('name')"><i class="fa fa-sort" aria-hidden="true"></i> Name</th>
-              <th (click)="orderBy('value')"><i class="fa fa-sort" aria-hidden="true"></i> Value</th>
-              <th (click)="orderBy('productType')"><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
-              <th (click)="orderBy('date')"><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> #</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Name</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Value</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Size</th>
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <td>asd</td>
-              <td>asd</td>
-              <td>ads</td>
-              <td>xxx</td>
-              <td>sss</td>
+            <tr *ngFor="let cp of cartGlobalService.userCart">
+              <td>{{cp.product.id}}</td>
+              <td>{{cp.product.name}}</td>
+              <td>{{cp.product.value}}</td>
+              <td>{{cp.product.productType}}</td>
+              <td>{{cp.product.date}}</td>
+              <td>{{cp.size}}</td>
             </tr>
           </tbody>
         </table>

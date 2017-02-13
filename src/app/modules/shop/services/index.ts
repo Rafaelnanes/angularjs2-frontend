@@ -1,0 +1,1 @@
+export { CartGlobalService } from './cart-global.service';

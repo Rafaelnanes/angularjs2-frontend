@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ProductService, Product } from 'app/modules/product/index';
 import { GlobalService, DefaultHttp, FilterDTO } from 'app/modules/shared/index';
+import { CartGlobalService } from './../../services/index';
 declare var jQuery: any;
 
 @Component({
@@ -24,7 +25,8 @@ export class ShopMainComponent implements OnInit {
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
     public defaultHttp: DefaultHttp,
-    public globalService: GlobalService) {
+    public globalService: GlobalService,
+    private cartGlobalService: CartGlobalService) {
     this.toastr.setRootViewContainerRef(vcr);
 
   }
@@ -62,8 +64,8 @@ export class ShopMainComponent implements OnInit {
     });
   }
 
-  public addToCart():void{
-    console.log('added');
+  public addToCart(product: Product): void {
+    this.cartGlobalService.addProduct(product);
   }
 
   public orderBy(key: string): void {
