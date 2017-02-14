@@ -15,6 +15,7 @@
               <th><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
               <th><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
               <th><i class="fa fa-sort" aria-hidden="true"></i> Quantity</th>
+              <th><i class="fa fa-sort" aria-hidden="true"></i> Action</th>
             </tr>
           </thead>
           <tbody>
@@ -25,6 +26,7 @@
               <td>{{cp.product.productType}}</td>
               <td>{{cp.product.date | date:globalService.datePipe}}</td>
               <td>{{cp.quantity}}</td>
+              <button type="button" (click)="removeProduct(cp)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
             </tr>
           </tbody>
         </table>

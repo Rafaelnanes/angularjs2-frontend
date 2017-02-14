@@ -4,6 +4,8 @@ import { CartGlobalService, UserProductService, } from './../../services/index';
 import { GlobalService, DefaultHttp } from 'app/modules/shared/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
+import { UserProduct } from './../../models/index';
+
 @Component({
   selector: 'crt-my-cart',
   templateUrl: './my-cart.component.html'
@@ -28,6 +30,10 @@ export class MyCartComponent implements OnInit {
     }).catch(response => {
       DefaultHttp.handleError('Error saving the cart', this.toastr, response);
     });
+  }
+
+  public removeProduct(userProduct: UserProduct): void {
+    this.cartGlobalService.removeProduct(userProduct);
   }
 
 }

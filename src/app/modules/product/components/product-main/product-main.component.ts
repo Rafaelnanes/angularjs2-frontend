@@ -75,7 +75,7 @@ export class ProductMainComponent implements OnInit {
     this.isSubmitted = true;
     if (this.productForm.valid) {
       let product: Product = this.productForm.value;
-      if (!lodash.isEmpty(product.date) && lodash.isDate(product.date)) {
+      if (!lodash.isEmpty(product.date)) {
         product.date = this.date.getTime().toString();
       }
       if (this.operation == OperationEnum.CREATE) {
@@ -112,7 +112,7 @@ export class ProductMainComponent implements OnInit {
 
   public onChangeDate(event: Date): void {
     this.date = event;
-    this.productForm.get('date').patchValue(this.formatDate(this.date));
+    this.productForm.get('date').setValue(this.formatDate(this.date));
     this.isShowDatePicker = false;
   }
 
@@ -137,7 +137,7 @@ export class ProductMainComponent implements OnInit {
   }
 
   private formatDate(date: Date): string {
-    return new DatePipe('pt-BR').transform(date, 'dd-MM-yyyy');
+    return new DatePipe('pt-BR').transform(date, 'dd/MM/yyyy');
   }
 
   private changeVisibleDatePicker(): void {

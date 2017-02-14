@@ -32,7 +32,18 @@ export class CartGlobalService {
     localStorage.setItem(AppSettings.USER_CART, JSON.stringify(this.userCart));
   }
 
-  public resetCart():void{
+  public removeProduct(userProduct: UserProduct): void {
+    let index: number;
+    for (var i = this.userCart.length - 1; i--;) {
+      if (this.userCart[i].product.id == userProduct.product.id) {
+        index = i;
+      }
+    }
+    this.userCart.splice(index, 1);
+    localStorage.setItem(AppSettings.USER_CART, JSON.stringify(this.userCart));
+  }
+
+  public resetCart(): void {
     this.userCart = [];
   }
 
