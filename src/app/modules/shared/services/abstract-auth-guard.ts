@@ -17,8 +17,8 @@ export abstract class AbstractAuthGuard {
     protected canActivateByRole(role: string): boolean {
         let isActivate: boolean = this.isUserLogged();
         if (isActivate) {
-            for (let permission of AppSettings.getUserPermissions()) {
-                if (permission == role) {
+            for (let permission of AppSettings.getUser().userLevels) {
+                if (permission.level == role) {
                     return true;
                 }
             }

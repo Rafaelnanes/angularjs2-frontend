@@ -13,7 +13,11 @@ import { CartGlobalService } from 'app/modules/shop/services/cart-global.service
 @Injectable()
 export class AuthenticationService {
 
-    constructor(private router: Router, private global: GlobalService, public defaultHtt: DefaultHttp, private cartGlobalService: CartGlobalService) {
+    constructor(
+        private router: Router,
+        private global: GlobalService,
+        public defaultHtt: DefaultHttp,
+        private cartGlobalService: CartGlobalService) {
     }
 
     public login(user: User): Promise<Response> {
@@ -22,10 +26,9 @@ export class AuthenticationService {
                 let result: Headers = response.headers;
                 let token: string = result.get(AppSettings.TOKEN_HEADER);
                 let tokenDecoded = atob(token).split("//");
-                let roles: string = tokenDecoded[0];
-                localStorage.setItem(AppSettings.CURRENT_USER, user.username);
+                user = JSON.parse(tokenDecoded[0]);
+                localStorage.setItem(AppSettings.CURRENT_USER, JSON.stringify(user));
                 localStorage.setItem(AppSettings.TOKEN_HEADER, tokenDecoded[1]);
-                localStorage.setItem(AppSettings.CURRENT_USER_PERMISSIONS, roles);
                 this.global.logUser();
                 return response;
             });
@@ -35,7 +38,6 @@ export class AuthenticationService {
     public logout(): void {
         localStorage.removeItem(AppSettings.CURRENT_USER);
         localStorage.removeItem(AppSettings.TOKEN_HEADER);
-        localStorage.removeItem(AppSettings.CURRENT_USER_PERMISSIONS);
         localStorage.removeItem(AppSettings.USER_CART);
         localStorage.clear();
         this.cartGlobalService.resetCart();

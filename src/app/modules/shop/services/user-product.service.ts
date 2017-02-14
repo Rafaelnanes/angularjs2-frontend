@@ -15,4 +15,8 @@ export class UserProductService {
     return this.defaultHttp.post(this.MODULE_API_PATH, userProduct);
   };
 
+  public getByUserId(userId:number): Promise<Response> {
+    return this.defaultHttp.get(this.MODULE_API_PATH + "/" + userId);
+  };
+
 }

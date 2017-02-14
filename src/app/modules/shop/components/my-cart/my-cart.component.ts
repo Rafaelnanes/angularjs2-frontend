@@ -22,6 +22,12 @@ export class MyCartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userProductService.getByUserId(this.globalService.currentUser.id).then(response =>{
+      console.log('response.json()', response.json());
+      this.cartGlobalService.userCart = response.json();
+    }).catch(response =>{
+      DefaultHttp.handleError("Error loading the cart", this.toastr, response);
+    });
   }
 
   public saveCart(): void {

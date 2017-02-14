@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { AppSettings } from './index';
+import { User, UserLevel } from 'app/modules/shared/index';
 
 @Injectable()
 export class GlobalService {
 
-  public currentUser: string;
+  public currentUser: User;
   public isUserLogged: boolean;
   public loading: boolean;
 
@@ -14,7 +15,7 @@ export class GlobalService {
   public symbolDisplay: boolean = true;
 
   //date pipe
-  public datePipe:string = "dd/MM/yyyy";
+  public datePipe: string = "dd/MM/yyyy";
 
   //ROLES
   public USER_ROLE_ADMIN: string = AppSettings.USER_ROLE_ADMIN;
@@ -22,8 +23,9 @@ export class GlobalService {
   public USER_ROLE_CUSTOMER: string = AppSettings.USER_ROLE_CUSTOMER;
 
   constructor() {
-    this.currentUser = localStorage.getItem(AppSettings.CURRENT_USER);
-    if (this.currentUser) {
+    let user: User = AppSettings.getUser();
+    if (user != null) {
+      this.currentUser = user;
       this.isUserLogged = true;
     }
   }
@@ -33,14 +35,13 @@ export class GlobalService {
   }
 
   public logUser(): void {
-    let user: string = localStorage.getItem(AppSettings.CURRENT_USER);
     this.isUserLogged = true;
-    this.currentUser = user;
+    this.currentUser = AppSettings.getUser();
   }
 
   public hasPermission(permissionKey: string): boolean {
-    for (let permission of AppSettings.getUserPermissions()) {
-      if (permission == permissionKey) {
+    for (let permission of AppSettings.getUser().userLevels) {
+      if (permission.level == permissionKey) {
         return true;
       }
     }
