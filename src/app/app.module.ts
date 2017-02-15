@@ -9,6 +9,13 @@ import { SharedModule, AuthGuardService, AuthGuardAdminService, DefaultHttp, Glo
 import { AppComponent } from './app.component';
 import { CartGlobalService } from './modules/shop/services/cart-global.service';
 
+let locale = "en-US";
+if(!localStorage.getItem("locale")){
+  localStorage.setItem("locale", "en-US");
+}else{
+  locale = localStorage.getItem("locale");
+}
+
 //only services from Shared module
 const sharedProviders: any[] = [
   AuthGuardService,
@@ -35,7 +42,7 @@ const sharedProviders: any[] = [
   providers: [
     sharedProviders,
     CartGlobalService,
-    { provide: LOCALE_ID, useValue: "en-US" }
+    { provide: LOCALE_ID, useValue: locale}
   ],
   bootstrap: [AppComponent]
 })

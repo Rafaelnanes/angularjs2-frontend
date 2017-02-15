@@ -39,6 +39,7 @@ export class AuthenticationService {
         localStorage.removeItem(AppSettings.CURRENT_USER);
         localStorage.removeItem(AppSettings.TOKEN_HEADER);
         localStorage.removeItem(AppSettings.USER_CART);
+        localStorage.removeItem("locale");
         localStorage.clear();
         this.cartGlobalService.resetCart();
         this.global.removeUserSession();

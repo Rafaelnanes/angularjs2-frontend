@@ -17,4 +17,9 @@ export class NavBarComponent {
   public logout(): void {
     this.authService.logout();
   }
+
+  public setLocale(locale:string):void{
+    localStorage.setItem("locale", locale);
+    location.reload();
+  }
 }
