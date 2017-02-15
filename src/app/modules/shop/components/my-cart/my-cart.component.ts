@@ -22,16 +22,19 @@ export class MyCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userProductService.getByUserId(this.globalService.currentUser.id).then(response =>{
-      console.log('response.json()', response.json());
-      this.cartGlobalService.userCart = response.json();
-    }).catch(response =>{
+    this.userProductService.getByUserId(this.globalService.currentUser.id).then(response => {
+      this.cartGlobalService.userCart.userProducts = response.json();
+      for(let up of this.cartGlobalService.userCart.userProducts){
+        up.total = up.product.value * up.quantity;
+      }
+      this.cartGlobalService.calculateTotal();
+    }).catch(response => {
       DefaultHttp.handleError("Error loading the cart", this.toastr, response);
     });
   }
 
   public saveCart(): void {
-    this.userProductService.save(this.cartGlobalService.userCart).then(response => {
+    this.userProductService.save(this.cartGlobalService.userCart.userProducts).then(response => {
       this.toastr.success('Cart saved');
     }).catch(response => {
       DefaultHttp.handleError('Error saving the cart', this.toastr, response);
@@ -40,6 +43,14 @@ export class MyCartComponent implements OnInit {
 
   public removeProduct(userProduct: UserProduct): void {
     this.cartGlobalService.removeProduct(userProduct);
+  }
+
+  public decrementProduct(userProduct: UserProduct): void {
+    this.cartGlobalService.decrementProduct(userProduct);
+  }
+
+  public incrementProduct(userProduct: UserProduct): void {
+    this.cartGlobalService.addProduct(userProduct.product);
   }
 
 }

@@ -14,19 +14,26 @@
               <th><i class="fa fa-sort" aria-hidden="true"></i> Value</th>
               <th><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
               <th><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
-              <th><i class="fa fa-sort" aria-hidden="true"></i> Quantity</th>
-              <th><i class="fa fa-sort" aria-hidden="true"></i> Action</th>
+              <th class="text-center"><i class="fa fa-sort" aria-hidden="true"></i> Quantity </th>
+              <th class="text-center"><i class="fa fa-sort" aria-hidden="true"></i> Total </th>
+              <th class="text-center"><i class="fa fa-sort" aria-hidden="true"></i> Action </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cp of cartGlobalService.userCart">
+            <tr *ngFor="let cp of cartGlobalService.userCart.userProducts">
               <td>{{cp.product.id}}</td>
               <td>{{cp.product.name}}</td>
               <td>{{cp.product.value | currency:globalService.currencyCode:globalService.symbolDisplay}}</td>
               <td>{{cp.product.productType}}</td>
               <td>{{cp.product.date | date:globalService.datePipe}}</td>
-              <td>{{cp.quantity}}</td>
-              <button type="button" (click)="removeProduct(cp)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+              <td class="text-center"><i (click)="decrementProduct(cp)" class="fa fa-minus-square"></i> {{cp.quantity}} <i (click)="incrementProduct(cp)" class="fa fa-plus-square"></i></td>
+              <td class="text-center">{{cp.total | currency:globalService.currencyCode:globalService.symbolDisplay}}</td>
+              <td class="text-center"><button type="button" (click)="removeProduct(cp)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+            </tr>
+             <tr>
+              <td colspan="6"></td>
+              <td class="text-center">Total: {{cartGlobalService.userCart.total | currency:globalService.currencyCode:globalService.symbolDisplay}}</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
