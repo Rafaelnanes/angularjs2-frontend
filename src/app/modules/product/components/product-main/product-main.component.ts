@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewContainerRef, EventEmitter } from '@angular/core';
-import { Router, Resolve, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators, Validator } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Product } from './../../models/index';
 import { OperationEnum } from './../../index';
 import { ProductService } from './../../services/product.service';
-import { DefaultHttp, GlobalService } from 'app/modules/shared/index';
+import { DefaultHttp, InputDateComponent } from 'app/modules/shared/index';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import * as lodash from 'lodash';
-declare var jQuery: any;
 
 @Component({
   selector: 'pro-product-main',
@@ -18,15 +15,16 @@ declare var jQuery: any;
 })
 export class ProductMainComponent implements OnInit {
 
-  public mask = [/[0-3]/, /[0-9]/, '/',/[0-1]/, /[0-9]/, '/', /[1-2]/, /\d/, /\d/, /\d/];
   public readonly: boolean = false;
   public productForm: FormGroup;
   public isSubmitted: boolean = false;
   public product: Product;
   public operation: OperationEnum;
   public productTypes: string[] = [];
-  public date: Date;
   public isShowDatePicker: boolean;
+  public dateModel: Date;
+  @ViewChild(InputDateComponent)
+  private inputDateComponent: InputDateComponent;
 
   constructor(
     public fb: FormBuilder,
@@ -35,13 +33,13 @@ export class ProductMainComponent implements OnInit {
     public toastr: ToastsManager,
     public vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
+
   }
 
   public ngOnInit(): void {
     this.buildForm();
     this.setFormModelValue();
     this.getAllProductTypes();
-    this.watchDateChange();
   }
 
   private getAllProductTypes(): void {
@@ -59,8 +57,9 @@ export class ProductMainComponent implements OnInit {
       this.productService.getById(id).then(response => {
         this.product = response.json();
         if (this.product.date != null) {
-          this.product.date = this.formatDate(new Date(this.product.date));
+          this.inputDateComponent.onChangeDate(new Date(this.product.date));
         }
+
         this.productForm.patchValue(this.product);
       });
 
@@ -75,9 +74,7 @@ export class ProductMainComponent implements OnInit {
     this.isSubmitted = true;
     if (this.productForm.valid) {
       let product: Product = this.productForm.value;
-      if (!lodash.isEmpty(product.date)) {
-        product.date = this.date.getTime().toString();
-      }
+      product.date = this.dateModel.getTime().toString();
       if (this.operation == OperationEnum.CREATE) {
         this.onSave(product);
       } else {
@@ -110,40 +107,22 @@ export class ProductMainComponent implements OnInit {
     this.isSubmitted = false;
   }
 
-  public onChangeDate(event: Date): void {
-    this.date = event;
-    this.productForm.get('date').setValue(this.formatDate(this.date));
-    this.isShowDatePicker = false;
-  }
 
   private buildForm(): void {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       value: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       productType: ['', Validators.required],
-      date: [''],
       id: ['']
     });
   }
 
-  private watchDateChange(): void {
-    this.productForm.get('date').valueChanges.subscribe(data => {
-      let str: any = data;
-      if (str != null) {
-        str = str.split('/');
-        this.date = new Date(str[2], str[1] - 1, str[0]);
-      }
-    });
-  }
-
-  private formatDate(date: Date): string {
-    return new DatePipe('pt-BR').transform(date, 'dd/MM/yyyy');
-  }
-
-  private changeVisibleDatePicker(): void {
-    setTimeout(() => {
-      this.isShowDatePicker = false;
-    }, 100);
+  public onChangeDateModel(date: Date): void {
+    this.dateModel = date;
   }
 
 }
+
+
+
+

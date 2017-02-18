@@ -1,0 +1,2 @@
+<input type="text" [textMask]="{mask: mask}" [readonly]="readonly" (focus)="changeVisibleDatePicker(true)" (blur)="changeVisibleDatePicker(false)" [ngModel]="dateModel" (ngModelChange)="onChangeModel($event)" class="form-control" aria-describedby="nameValue">
+<ngl-datepicker [style.display]="isShowDatePicker ? 'inline' : 'none'" (dateChange)="onChangeDate($event)" [(date)]="date" class="slds-box slds-box--x-small"></ngl-datepicker>
