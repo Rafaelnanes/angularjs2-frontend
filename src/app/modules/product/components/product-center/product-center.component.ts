@@ -54,7 +54,7 @@ export class ProductCenterComponent implements OnInit {
       this.products = json.data;
       this.size = json.size;
     }).catch(response => {
-      DefaultHttp.handleError('Error getting product list', this.toastr, response);
+      this.defaultHttp.handleError('Error getting product list', this.toastr, response);
     });
   }
 
@@ -71,7 +71,7 @@ export class ProductCenterComponent implements OnInit {
       this.refreshProducts();
       this.toastr.success("Product removed");
     }).catch(response => {
-      DefaultHttp.handleError('Error to delete the product', this.toastr, response);
+      this.defaultHttp.handleError('Error to delete the product', this.toastr, response);
     });
   }
 

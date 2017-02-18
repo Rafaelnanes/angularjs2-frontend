@@ -49,8 +49,11 @@ export class DefaultHttp {
         return promise;
     }
 
-    public static handleError(message: string, toastr: ToastsManager, response: Response): void {
+    public handleError(message: string, toastr: ToastsManager, response: Response): void {
         let error = response.json();
+        if(error.statusCode == 401 && !!error.statusCodeDetail){
+            this.router.navigate(['/login', error.messages[0]]);
+        }
         for (let value of error.messages) {
             toastr.error(message + ': Code: ' + error.statusCode + ", message: " + value);
         }

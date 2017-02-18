@@ -15,6 +15,10 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'login/:error',
+    component: LoginComponent
+  },
   { path: 'product', loadChildren: 'app/modules/product/product.module#ProductModule' },
   { path: 'shop', loadChildren: 'app/modules/shop/shop.module#ShopModule' },
   { path: '403', component: UnauthorizedComponent },

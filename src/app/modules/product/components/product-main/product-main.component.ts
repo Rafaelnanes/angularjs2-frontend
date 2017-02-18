@@ -27,6 +27,7 @@ export class ProductMainComponent implements OnInit {
   private inputDateComponent: InputDateComponent;
 
   constructor(
+    private defaultHttp: DefaultHttp,
     public fb: FormBuilder,
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -46,7 +47,7 @@ export class ProductMainComponent implements OnInit {
     this.productService.getAllProductTypes().then(response => {
       this.productTypes = response.json();
     }).catch(response => {
-      DefaultHttp.handleError('Error loading product types', this.toastr, response);
+      this.defaultHttp.handleError('Error loading product types', this.toastr, response);
     });
   }
 
@@ -90,7 +91,7 @@ export class ProductMainComponent implements OnInit {
       this.toastr.success('Product added');
       this.resetFormValues();
     }).catch(response => {
-      DefaultHttp.handleError('Error adding product', this.toastr, response);
+      this.defaultHttp.handleError('Error adding product', this.toastr, response);
     });
   }
 
@@ -99,7 +100,7 @@ export class ProductMainComponent implements OnInit {
       this.toastr.success('Product updated');
       this.resetFormValues();
     }).catch(response => {
-      DefaultHttp.handleError('Error updating product', this.toastr, response);
+      this.defaultHttp.handleError('Error updating product', this.toastr, response);
     });
   }
 

@@ -1,4 +1,5 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { User, AuthenticationService } from 'app/modules/shared/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router } from '@angular/router';
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styles: []
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   public user: User = new User("adm", "adm");
 
@@ -15,8 +16,17 @@ export class LoginComponent {
     private authService: AuthenticationService,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute,
+    ) {
     this.toastr.setRootViewContainerRef(vcr);
+  }
+
+  public ngOnInit(): void {
+    let params: string = this.route.snapshot.params["error"];
+    if (!!params) {
+      this.toastr.error(params);
+    };
   }
 
   public onSubmit(): void {
