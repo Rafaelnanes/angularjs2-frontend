@@ -22,10 +22,10 @@
 
 <h3>visitor</h3>
 <p>1 - Only visitor can access the index page </p>
-<p>2 - Visitor should be able to access the '/angularjs2-frontend/product' but he can't maintain the products</p>
+<p>2 - Visitor can access the '/angularjs2-frontend/product' but he can't maintain the products</p>
 <p>3 - Can't access the shop area</p>
 
 <h3>customer</h3>
 <p>1 - Can't access the index page</p>
 <p>2 - Can't access the product area</p>
-<p>3 - Only customer should be able to access '/angularjs2-frontend/shop'</p>
+<p>3 - Only customer can access '/angularjs2-frontend/shop'</p>
