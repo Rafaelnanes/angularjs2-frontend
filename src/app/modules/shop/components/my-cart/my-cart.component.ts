@@ -13,6 +13,7 @@ import { UserProduct } from './../../models/index';
 export class MyCartComponent implements OnInit {
 
   constructor(
+    private defaultHttp: DefaultHttp,
     public cartGlobalService: CartGlobalService,
     public globalService: GlobalService,
     public userProductService: UserProductService,
@@ -24,12 +25,12 @@ export class MyCartComponent implements OnInit {
   ngOnInit() {
     this.userProductService.getByUserId(this.globalService.currentUser.id).then(response => {
       this.cartGlobalService.userCart.userProducts = response.json();
-      for(let up of this.cartGlobalService.userCart.userProducts){
+      for (let up of this.cartGlobalService.userCart.userProducts) {
         up.total = up.product.value * up.quantity;
       }
       this.cartGlobalService.calculateTotal();
     }).catch(response => {
-      DefaultHttp.handleError("Error loading the cart", this.toastr, response);
+      this.defaultHttp.handleError("Error loading the cart", this.toastr, response);
     });
   }
 
@@ -37,7 +38,7 @@ export class MyCartComponent implements OnInit {
     this.userProductService.save(this.cartGlobalService.userCart.userProducts).then(response => {
       this.toastr.success('Cart saved');
     }).catch(response => {
-      DefaultHttp.handleError('Error saving the cart', this.toastr, response);
+      this.defaultHttp.handleError('Error saving the cart', this.toastr, response);
     });
   }
 

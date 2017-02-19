@@ -54,7 +54,7 @@ export class ShopMainComponent implements OnInit {
       this.products = json.data;
       this.size = json.size;
     }).catch(response => {
-      DefaultHttp.handleError('Error getting product list', this.toastr, response);
+      this.defaultHttp.handleError('Error getting product list', this.toastr, response);
     });
   }
 
