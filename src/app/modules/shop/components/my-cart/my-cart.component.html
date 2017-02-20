@@ -41,7 +41,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="button" [hidden]="cartGlobalService.userCart.length == 0" (click)="saveCart()" class="btn btn-success" >Save cart</button>
+      <button type="button" [hidden]="cartGlobalService.userCart.userProducts == 0" (click)="saveCart()" class="btn btn-success" >Save cart</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal">Payment</button>
     </div>
   </div>
