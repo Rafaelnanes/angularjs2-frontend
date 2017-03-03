@@ -75,7 +75,9 @@ export class ProductMainComponent implements OnInit {
     this.isSubmitted = true;
     if (this.productForm.valid) {
       let product: Product = this.productForm.value;
-      product.date = this.dateModel.getTime().toString();
+      if (!!this.dateModel) {
+        product.date = this.dateModel.getTime().toString();
+      }
       if (this.operation == OperationEnum.CREATE) {
         this.onSave(product);
       } else {
