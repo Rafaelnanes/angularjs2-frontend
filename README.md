@@ -1,8 +1,6 @@
 # Angularjs2Frontend
 
-<p>To see this project in action please visit the follow link: https://rafaelnanes.github.io/angularjs2-frontend/</p>
-
-<p>to access the application go to https://rafaelnanes.github.io/angularjs2-frontend/login</p>
+<p>To see this project in action please visit the follow link: https://rafaelnanes.github.io/angularjs2-frontend/login</p>
 
 <p>index page https://rafaelnanes.github.io/angularjs2-frontend/main</p>
 
