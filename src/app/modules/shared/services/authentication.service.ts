@@ -28,7 +28,7 @@ export class AuthenticationService {
                 let tokenDecoded = atob(token).split("//");
                 user = JSON.parse(tokenDecoded[0]);
                 localStorage.setItem(AppSettings.CURRENT_USER, JSON.stringify(user));
-                localStorage.setItem(AppSettings.TOKEN_HEADER, tokenDecoded[1]);
+                localStorage.setItem(AppSettings.TOKEN_HEADER, token);
                 this.global.logUser();
                 return response;
             });
