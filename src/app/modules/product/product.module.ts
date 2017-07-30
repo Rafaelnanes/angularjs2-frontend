@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProductRoutingModule } from './product-routing.module';//TODO
-import { ProductCenterComponent, ProductMainComponent } from './components/index';
+import { ProductCenterComponent, ProductMainComponent, ProductCenterWebsocketComponent } from './components/index';
 import { SharedModule } from './../shared/index';
 import { ProductService } from './services/product.service';
 
@@ -18,7 +18,8 @@ import { ProductService } from './services/product.service';
   ],
   declarations: [
     ProductCenterComponent,
-    ProductMainComponent
+    ProductMainComponent,
+    ProductCenterWebsocketComponent
   ],
   exports: [
 

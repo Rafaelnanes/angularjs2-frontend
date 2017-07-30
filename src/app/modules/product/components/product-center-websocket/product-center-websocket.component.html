@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <h1>Product list (WebSocket)</h1>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="orderBy('id')"><i class="fa fa-sort" aria-hidden="true"></i> #</th>
+          <th (click)="orderBy('name')"><i class="fa fa-sort" aria-hidden="true"></i> Name</th>
+          <th (click)="orderBy('value')"><i class="fa fa-sort" aria-hidden="true"></i> Value</th>
+          <th (click)="orderBy('productType')"><i class="fa fa-sort" aria-hidden="true"></i> Type</th>
+          <th (click)="orderBy('date')"><i class="fa fa-sort" aria-hidden="true"></i> Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.value | currency:globalService.currencyCode:globalService.symbolDisplay}}</td>
+          <td>{{product.productType}}</td>
+          <td>{{product.date | date:globalService.datePipe}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
